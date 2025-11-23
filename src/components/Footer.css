@@ -1,0 +1,174 @@
+/* src/components/Footer.css */
+
+/* --- Root Variables and Layout --- */
+:root {
+    --primary-color: #003496; /* Teal/Green Accent */
+    --footer-bg: #101418; /* Dark slate gray background */
+    --text-white: #ffffff;
+    --text-muted: #a0a0a0; /* Secondary text color */
+}
+
+.site-footer {
+    background-color: var(--footer-bg); 
+    color: var(--text-white);
+    padding: 80px 0 20px; 
+    position: relative; 
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* --- Top Info Grid (Address, Contact, Hours, Follow Us) --- */
+
+.footer-info-grid {
+    display: grid;
+    /* Four equal columns */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.info-column {
+    padding-right: 20px;
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info-icon {
+    /* Styles for the React Icons */
+    font-size: 1.5rem; 
+    color: var(--primary-color);
+    margin-right: 10px;
+    line-height: 1;
+    display: flex; /* Ensures the icon aligns correctly */
+    align-items: center;
+}
+
+.info-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-white);
+}
+
+.info-detail {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 3px 0 0 25px; /* Indent to align with text, not the icon */
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    margin-left: 15px; /* Slight offset for visual alignment */
+}
+
+.social-icon-link {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-white);
+    font-size: 1.1rem; /* Slightly larger size for social icons */
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.social-icon-link:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* --- Separator and Copyright --- */
+
+.footer-separator {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 0 20px;
+}
+
+.footer-copyright-bar {
+    text-align: center;
+    padding: 10px 0 40px; 
+}
+
+.copyright-text,
+.designer-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 5px 0;
+}
+
+.designer-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.designer-link:hover {
+    color: #00c4b4;
+}
+
+/* Scroll to Top Button (Fixed element outside the footer content flow) */
+.scroll-to-top-footer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    z-index: 1000;
+    transition: opacity 0.3s;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .footer-info-grid {
+        /* Two columns on medium screens */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-info-grid {
+        /* Single column on small screens */
+        grid-template-columns: 1fr; 
+    }
+    .footer-container {
+        padding: 0 20px;
+    }
+    .info-detail {
+        margin-left: 0; 
+    }
+    .social-links {
+        justify-content: center;
+        margin-left: 0;
+    }
+    /* Center the info blocks if they are single column */
+    .info-column {
+        text-align: center;
+    }
+    .info-header {
+        justify-content: center;
+    }
+}

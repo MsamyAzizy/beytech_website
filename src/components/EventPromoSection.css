@@ -1,0 +1,321 @@
+/* src/components/EventPromoSection.css */
+
+/* --- Variables (ADJUSTED FOR DARK THEME) --- */
+:root {
+    --dark-bg: rgb(8, 8, 8); /* Main background: dark */
+    --light-text: #ffffff; /* Main text: white */
+    --light-grey-text: #a0a0a0; /* Secondary text: light grey */
+    --blue-accent: #00bcd4; /* Cyan/Blue Accent (used for subheading now) */
+    --register-btn-color: #ffcc00; /* Yellow CTA button */
+    --schedule-btn-border: #444444; /* Dark border for secondary button */
+    --badge-bg: rgba(26, 26, 26, 0.9); /* Dark background for floating badges */
+}
+
+/* --- Keyframes for Badge Slide-In Animation (Unchanged) --- */
+@keyframes slideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========================================================= */
+/* 1. Base Layout and Typography */
+/* ========================================================= */
+
+.event-promo-wrapper {
+    background-color: var(--dark-bg);
+    padding: 100px 0;
+    position: relative;
+    /* Adjusted radial gradient for a dark theme effect */
+    background: radial-gradient(circle at 10% 50%, rgba(0, 188, 212, 0.1) 0%, transparent 40%), var(--dark-bg);
+    color: var(--light-text); /* Set base color for inheritance */
+}
+
+.event-promo-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+/* --- Left Content Column --- */
+.event-content-left {
+    flex: 1;
+    max-width: 50%;
+}
+
+.event-heading-main {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--light-text);
+    margin: 0 0 10px 0;
+    line-height: 1.1;
+}
+
+.event-heading-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blue-accent);
+    margin: 0 0 10px 0; 
+}
+
+/* *** CURRENT TIME STYLING (Unchanged) *** */
+.current-time {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--light-text);
+    margin-bottom: 30px; 
+    display: block;
+}
+
+.current-time .time-label {
+    color: var(--light-grey-text);
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.current-time .time-value {
+    color: var(--blue-accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: 'Consolas', 'Courier New', monospace; 
+}
+
+.current-time .time-period {
+    font-weight: 600;
+    color: #8c8c8c;
+}
+.current-time .time-period-morning {
+    color: #ff9800;
+}
+.current-time .time-period-afternoon {
+    color: #00bcd4;
+}
+.current-time .time-period-evening {
+    color: #e91e63;
+}
+.current-time .time-period-night {
+    color: #9c27b0;
+}
+/* ********************************* */
+
+.event-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: var(--light-grey-text);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* --- Meta Data (Date, Location, Attendees) --- */
+.event-meta-group {
+    margin-bottom: 40px;
+}
+
+.event-meta-item {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: var(--light-text);
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ========================================================= */
+/* 2. CTA Buttons and Timer */
+/* ========================================================= */
+
+.event-cta-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.cta-register {
+    background-color: var(--register-btn-color);
+    color: var(--dark-bg);
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-register:hover {
+    background-color: #fff200;
+}
+
+.cta-schedule {
+    background: none;
+    color: var(--light-text);
+    padding: 14px 30px;
+    border: 2px solid var(--schedule-btn-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.cta-schedule:hover {
+    background-color: var(--schedule-btn-border);
+    color: var(--light-text);
+}
+
+
+/* ========================================================= */
+/* 3. Right Image Column & Badges */
+/* ========================================================= */
+
+.event-image-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    padding: 20px; 
+}
+
+.image-card {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    border-radius: 16px;
+    overflow: hidden;
+    /* Adjust shadow intensity for dark background */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); 
+    transform: rotate(2deg); 
+    transition: transform 0.4s ease-in-out;
+}
+
+.image-card:hover {
+    transform: rotate(0deg);
+}
+
+.summit-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Feature Badges (Unchanged) --- */
+.feature-badge {
+    position: absolute;
+    right: 0;
+    background-color: var(--badge-bg);
+    color: var(--light-text);
+    padding: 10px 20px;
+    border-radius: 999px 0 0 999px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Default/Reset state: Off-screen and invisible */
+    opacity: 0; 
+    transform: translateX(100%); 
+    transition: opacity 0.1s, transform 0.1s; /* Quick reset transition */
+}
+
+
+/* Visible state: Apply animation when the .is-animated class is added by React */
+.feature-badge.is-animated {
+    animation-name: slideInFromRight;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+/* Staggered Delay for individual badges */
+.badge-top-right.is-animated {
+    top: 15%;
+    animation-delay: 0.2s; /* Start first */
+}
+.badge-mid-right.is-animated {
+    top: 40%;
+    animation-delay: 0.4s;
+}
+.badge-bottom-right.is-animated {
+    top: 65%;
+    animation-delay: 0.6s; /* Start last */
+}
+
+/* ========================================================= */
+/* 4. Responsive Adjustments (Unchanged) */
+/* ========================================================= */
+
+@media (max-width: 1100px) {
+    .event-promo-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .event-content-left {
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .event-heading-main {
+        font-size: 3rem;
+    }
+    
+    /* Center text blocks on mobile */
+    .current-time,
+    .event-description,
+    .event-meta-group {
+        text-align: center; /* Center these items */
+        margin: 0 auto 30px auto; 
+    }
+    
+    .event-meta-item {
+        justify-content: center;
+    }
+    
+    .event-cta-group {
+        justify-content: center;
+    }
+    
+    .event-image-right {
+        justify-content: center;
+    }
+    
+    .image-card {
+        transform: rotate(0deg); 
+    }
+    
+    /* Hide animated badges on smaller screens to prevent overflow */
+    .badge-top-right, .badge-mid-right, .badge-bottom-right {
+        display: none; 
+    }
+}
+
+@media (max-width: 600px) {
+    .event-promo-wrapper {
+        padding: 50px 0;
+    }
+    .event-promo-container {
+        padding: 0 20px;
+    }
+    .event-heading-main {
+        font-size: 2.5rem;
+    }
+    .event-cta-group {
+        flex-direction: column;
+    }
+}

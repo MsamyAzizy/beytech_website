@@ -1,0 +1,442 @@
+/* ====================================================================== */
+/* 1. Contact Section Styles (ContactSection.css) */
+/* ====================================================================== */
+
+/* --- Animation Keyframes (Smoother Style) --- */
+
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+html {
+    scroll-behavior: smooth; /* <-- ADD THIS LINE */
+}
+/* --- Common Variables --- */
+:root {
+    --primary-color: #003496; /* Teal/Green Accent */
+    --background-dark: #101418; 
+    --card-background: #26292e; /* Darker grey for form/map */
+    --text-light: #ffffff;
+    --text-medium: #a0a0a0;
+    --smooth-ease: cubic-bezier(.25, .46, .45, .94);
+    --animation-duration: 0.8s;
+
+    /* Footer specific variables included here for reference, though usually in footer.css */
+    --footer-bg: #212b36; 
+    --text-muted: #a0a0a0;
+}
+
+/* --- On-Scroll Animation States --- */
+.initial-hidden {
+    opacity: 0;
+}
+
+.is-visible-fade {
+    animation: fadeInUp var(--animation-duration) var(--smooth-ease) forwards;
+}
+
+.is-visible-left {
+    animation: slideInLeft var(--animation-duration) var(--smooth-ease) forwards;
+}
+
+.is-visible-right {
+    animation: slideInRight var(--animation-duration) var(--smooth-ease) forwards;
+}
+
+/* --- Section Layout --- */
+.contact-section {
+    background-color: var(--background-dark); 
+    padding: 100px 0;
+    color: var(--text-light);
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* --- Header Styling (Consistent) --- */
+.contact-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact-tagline {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.contact-heading {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-medium);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Content Grid Layout --- */
+.contact-content-grid {
+    display: grid;
+    grid-template-columns: 30% 65%; 
+    gap: 30px;
+    align-items: flex-start; 
+}
+
+/* --- Left Card: Contact Information --- */
+.contact-info-card {
+    background-color: #003496;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; 
+}
+
+.info-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.info-description {
+    font-size: 0.95rem;
+    color: #e0f2f1; /* Lighter shade of teal for text */
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detail-item {
+    background-color: rgba(0, 0, 0, 0.1); 
+    border-radius: 4px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.detail-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+    /* Color of the icon is inherited from the text of the card, but often explicitly set to white/light */
+    color: var(--text-light);
+}
+
+.detail-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e0f2f1;
+    margin: 0;
+}
+
+.detail-detail {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* --- Right Column: Map and Form --- */
+.map-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Map Placeholder */
+.map-placeholder {
+    height: 300px; 
+    width: 1000px;
+    border-radius: 8px;
+    position: relative;
+    background-image: url('https://via.placeholder.com/800x300/404040/ffffff?text=Map+Placeholder'); 
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: white;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.map-overlay a {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+/* Form Card */
+.message-form-card {
+    width: 1000px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.form-description {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    background-color: #343a40; /* Darker input background */
+    border: 1px solid #495057;
+    border-radius: 4px;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-medium);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.send-button {
+    background-color: #003496;
+    color: var(--text-light);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start; 
+    margin-top: 10px;
+}
+
+.send-button:hover {
+    background-color: #37445a;
+}
+
+/* --- Responsive Adjustments (Contact) --- */
+@media (max-width: 1024px) {
+    .contact-content-grid {
+        grid-template-columns: 1fr; 
+        gap: 40px;
+    }
+}
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 0 20px;
+    }
+    .contact-info-card, .message-form-card {
+        padding: 30px 20px;
+    }
+}
+
+/* ====================================================================== */
+/* 2. Simple Footer Section Styles (Footer.css) */
+/* ====================================================================== */
+
+.site-footer {
+    background-color: var(--footer-bg); 
+    color: var(--text-light);
+    padding: 80px 0 20px; 
+    position: relative; 
+}
+
+/* The .footer-container is shared with the contact section */
+
+/* --- Top Info Grid (Address, Contact, Hours, Follow Us) --- */
+
+.footer-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.info-column {
+    padding-right: 20px;
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Reusing .detail-icon styles for the footer info icons */
+.site-footer .info-icon {
+    font-size: 1.5rem; 
+    color: var(--primary-color);
+    margin-right: 10px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.site-footer .info-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-light);
+}
+
+.info-detail {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 3px 0 0 25px; 
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    margin-left: 15px; 
+}
+
+.social-icon-link {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-light);
+    font-size: 1.1rem; 
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.social-icon-link:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* --- Separator and Copyright --- */
+
+.footer-separator {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 0 20px;
+}
+
+.footer-copyright-bar {
+    text-align: center;
+    padding: 10px 0 40px; 
+}
+
+.copyright-text,
+.designer-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 5px 0;
+}
+
+.designer-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.designer-link:hover {
+    color: #00c4b4;
+}
+
+/* Scroll to Top Button (Fixed element) */
+.scroll-to-top-footer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    z-index: 1000;
+    transition: opacity 0.3s;
+}
+
+
+/* --- Responsive Adjustments (Footer) --- */
+@media (max-width: 992px) {
+    .footer-info-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-info-grid {
+        grid-template-columns: 1fr; 
+    }
+    /* Reset layout for single column centering */
+    .site-footer .footer-container {
+        padding: 0 20px;
+    }
+    .site-footer .info-detail {
+        margin-left: 0; 
+    }
+    .social-links {
+        justify-content: center;
+        margin-left: 0;
+    }
+    .info-column {
+        text-align: center;
+    }
+    .info-header {
+        justify-content: center;
+    }
+}

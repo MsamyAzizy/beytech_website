@@ -1,0 +1,167 @@
+/* src/components/TeamSection.css */
+
+.team-section {
+    background-color: #0a0a0a; /* Very dark background */
+    color: #ffffff;
+    padding: 100px 0;
+    position: relative;
+    /* Create the dark, reddish gradient overlay visible in the screenshot */
+    background-image: radial-gradient(at 10% 80%, rgba(200, 50, 50, 0.1) 0%, transparent 50%),
+                      radial-gradient(at 90% 20%, rgba(50, 50, 200, 0.05) 0%, transparent 50%);
+    overflow: hidden;
+}
+
+.team-content-wrapper {
+    max-width: 1400px; /* Wider container to accommodate the full row */
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+/* --- Header & Text Styling --- */
+
+.team-header {
+    flex-shrink: 0;
+    width: 350px; /* Fixed width for the text column */
+}
+
+.team-tagline {
+    font-size: 0.9rem;
+    color: #999;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.team-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    /* Gradient color for the title, matching the visual */
+    background-image: linear-gradient(to right, var(--color-primary-accent), #ff6f9f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.team-description {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 300px;
+}
+
+/* Navigation Arrows (Optional for static section) */
+.team-nav-arrows {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.arrow {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #444;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #999;
+    transition: all 0.2s ease;
+}
+
+.arrow:hover {
+    border-color: var(--color-primary-accent);
+    color: var(--color-primary-accent);
+}
+
+/* --- Team Member Grid --- */
+
+.team-members-grid {
+    flex-grow: 1;
+    display: flex;
+    gap: 30px;
+    /* Ensures grid handles remaining width and stays on one line */
+    overflow-x: hidden; 
+    white-space: nowrap; 
+}
+
+.member-card {
+    flex-shrink: 0; /* Important: prevents cards from shrinking */
+    width: 280px; /* Fixed width for each card */
+    text-align: center;
+    border-radius: 12px;
+    background: #111; /* Slightly lighter background for the card */
+    padding-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+}
+
+.member-image-container {
+    width: 100%;
+    height: 350px; 
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 15px;
+}
+
+/* NEW: Styles for the actual <img> element */
+.member-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
+    display: block;
+    border-radius: 12px 12px 0 0;
+}
+
+/* REMOVED: The old .member-image-placeholder styles */
+
+.member-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.member-role {
+    font-size: 0.9rem;
+    color: var(--color-primary-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .team-content-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .team-header {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    /* Allow the grid to wrap on smaller screens */
+    .team-members-grid {
+        justify-content: center;
+        flex-wrap: wrap;
+        white-space: normal;
+        overflow-x: auto; /* Allow horizontal scrolling if necessary */
+    }
+    .member-card {
+        width: 45%; /* Two cards per row */
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 600px) {
+    .member-card {
+        width: 100%; /* Single column */
+        max-width: none;
+    }
+}

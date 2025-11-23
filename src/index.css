@@ -1,0 +1,33 @@
+/* src/index.css - Cleaned Global Styles */
+
+/* * 1. BASIC RESET: Ensures consistent layout across browsers. 
+ * (Already present in our previous structure.) 
+ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. GLOBAL FONT/BACKGROUND: Set a base font and neutral background. */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  /* Set background to a light/neutral color for professional site */
+  background-color: #ffffff; 
+  color: #333; /* Dark text for light background */
+}
+
+/* 3. BODY STYLING: Set the body to take up the full viewport width and height. */
+body {
+  margin: 0;
+  min-width: 100vw; /* Take up full width */
+  min-height: 100vh; /* Take up full height */
+}
+
+/* 4. ANCHOR TAG STYLING: Reset link appearance */
+a {
+  text-decoration: none; /* Remove default underline */
+  color: inherit; /* Inherit color unless custom style is applied */
+}

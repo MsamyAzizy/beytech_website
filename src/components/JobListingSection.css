@@ -1,0 +1,161 @@
+/* src/components/JobListingSection.css */
+
+/* --- Main Wrapper (Inherits Dark Background from Navbar/Feature sections) --- */
+.job-listing-wrapper {
+    background-color: #111111; /* Same dark background as the stats section */
+    padding: 80px 0;
+    color: #ffffff;
+}
+
+.job-listing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.listing-main-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.listing-sub-heading {
+    font-size: 1rem;
+    color: #a0a0a0;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* --- Card Grid Layout --- */
+.job-cards-grid {
+    display: grid;
+    /* 3 columns on large screens */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+}
+
+/* --- Individual Job Card Styling --- */
+.job-card {
+    /* UPDATED: Darker background color for the card itself */
+    background-color: #1a1c1f; 
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-logo {
+    /* Using large font for the emoji logo placeholder */
+    font-size: 2rem; 
+    width: 50px;
+    height: 50px;
+    background-color: #4a4f57; /* Background color for the logo circle */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-favorite {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #a0a0a0; /* Greyed out heart */
+}
+
+/* Title and Company */
+.job-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.company-info {
+    /* Light blue accent color from the screenshot */
+    color: #00bcd4; 
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+/* Meta Info */
+.job-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+}
+.meta-item .location {
+    margin-right: 5px;
+}
+
+/* Divider */
+.card-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 15px 0;
+}
+
+/* Details Grid */
+.job-details-grid {
+    display: grid;
+    /* 2x2 grid for details */
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px 10px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 3px;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    font-weight: 300;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .job-cards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+    }
+}
+
+@media (max-width: 600px) {
+    .job-listing-container {
+        padding: 0 20px;
+    }
+    .job-cards-grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+}

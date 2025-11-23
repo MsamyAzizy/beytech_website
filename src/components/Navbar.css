@@ -1,0 +1,389 @@
+/* src/components/Navbar.css */
+
+/* Define CSS Variables for consistency */
+:root {
+    --primary-dark-blue: #003496; /* Dark Blue Accent (used in Services Section) */
+    --secondary-cyan: #00bcd4;  /* Cyan/Teal Accent (used for link hovers/dropdown) */
+    --nav-link-font: 'Oswald', sans-serif; /* Unique font for main links */
+    --general-font: 'Montserrat', sans-serif; /* Font for CTA, Dropdown, etc. */
+}
+
+
+/* ====================================================================== */
+/* 1. Base Navbar Styles */
+/* ====================================================================== */
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.3); 
+  backdrop-filter: blur(8px); 
+  height: 100px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  position: sticky; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s ease-in-out, background-color 0.3s ease;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  width: 90%;
+  max-width: 1300px;
+}
+
+@media screen and (min-width: 1400px) {
+  .navbar-container {
+    max-width: 1600px; 
+    width: 65%;
+  }
+}
+
+.navbar-logo {
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 40px; 
+}
+.logo-image {
+  height: 60px; 
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  /* Applying the unique font to the main menu items */
+  font-family: var(--nav-link-font);
+  margin: 0 auto; 
+  padding: 0; 
+}
+
+.nav-item {
+  height: 100px;
+  position: relative; 
+}
+
+/* Base style for all main nav links */
+.nav-links {
+  color: #ffffff; 
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 15px;
+  height: 100%;
+  font-weight: 500; /* Increased weight for Oswald/unique font */
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease-out; 
+}
+
+.nav-links:hover {
+  /* Using the Dark Blue for the main link hover underline */
+  color: var(--primary-dark-blue); 
+}
+
+.nav-links::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  /* Using the Dark Blue for the main link underline */
+  background-color: var(--primary-dark-blue);
+  transition: all 0.3s ease;
+}
+
+.nav-links:hover::after {
+  width: calc(100% - 30px);
+  left: 15px;
+}
+
+.nav-item-mobile {
+  display: none;
+}
+
+/* --- CTA Button (Desktop) --- */
+.desktop-cta {
+    margin-left: 20px; 
+}
+
+.cta-button {
+  /* Keeping the CTA button with the standard font */
+  font-family: var(--general-font); 
+  padding: 10px 25px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  background-color: #ffcc00; 
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease-out;
+}
+
+.cta-button:hover {
+  background-color: #fff200;
+}
+
+/* ====================================================================== */
+/* 2. Dropdown Menu (Desktop Only) */
+/* ====================================================================== */
+
+/* Container for SERVICES link */
+.dropdown-item {
+    position: relative; 
+}
+
+/* Styles for the Services link container */
+.nav-dropdown-header {
+    padding-right: 25px; 
+    cursor: default; 
+    justify-content: center;
+}
+
+.nav-link-base {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav-dropdown-header:hover .nav-link-base {
+    /* Using the Secondary Cyan for the dropdown header hover */
+    color: var(--secondary-cyan);
+}
+
+.dropdown-icon {
+    font-size: 0.8rem;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-icon.rotated {
+    transform: rotate(180deg);
+}
+
+/* The actual desktop dropdown menu */
+.dropdown-menu {
+    display: block; 
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 220px;
+    background-color: #1a202c; 
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 999;
+    /* Dropdown links use the general font */
+    font-family: var(--general-font);
+}
+
+.dropdown-menu.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu li {
+    padding: 0;
+    height: auto;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 10px 20px;
+    text-align: left;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-link:hover {
+    /* Using the Secondary Cyan for dropdown item hover */
+    background-color: rgba(0, 188, 212, 0.1); 
+    color: var(--secondary-cyan);
+}
+
+/* Hide mobile dropdown items on desktop */
+.dropdown-mobile {
+    display: none;
+}
+
+
+/* ====================================================================== */
+/* 3. Social Media Styling */
+/* ====================================================================== */
+
+.social-nav.desktop {
+    display: flex;
+    gap: 12px;
+    margin-left: 20px;
+}
+
+.social-nav.mobile {
+    display: none; 
+}
+
+.social-icon-nav {
+    color: #ffffff;
+    font-size: 1.1rem;
+    transition: color 0.3s ease-out;
+}
+
+.social-icon-nav:hover {
+    /* Using the Secondary Cyan for social icon hover */
+    color: var(--secondary-cyan); 
+}
+
+
+/* ====================================================================== */
+/* 4. Mobile/Drawer Styles */
+/* ====================================================================== */
+
+.menu-icon {
+  display: none; 
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #ffffff; 
+  z-index: 1001;
+  position: relative;
+  height: 100%;
+  align-items: center;
+}
+
+@media screen and (max-width: 960px) {
+  
+  /* --- Global Drawer/Container Movement --- */
+  body.drawer-open #root {
+    transform: translateX(-70%); 
+    transition: transform 0.4s ease-in-out;
+  }
+    
+  body.drawer-open .navbar {
+    transform: translateX(-70%);
+  }
+
+  /* --- Element Visibility --- */
+  .menu-icon {
+    display: flex; 
+  }
+  .desktop-cta,
+  .social-nav.desktop,
+  .dropdown-menu { 
+    display: none !important; 
+  }
+  
+  /* --- Mobile Menu Drawer --- */
+  .nav-menu {
+    display: flex; 
+    flex-direction: column;
+    width: 70%; 
+    height: 100vh;
+    position: fixed;
+    top: 0; 
+    right: -70%; 
+    background: rgba(255, 255, 255, 0.95); 
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right 0.4s ease-in-out;
+    padding-top: 100px;
+    /* Mobile drawer text uses the general font for better readability */
+    font-family: var(--general-font);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-item {
+    height: auto;
+    margin: 0; 
+    padding: 0;
+    text-align: left;
+  }
+
+  .nav-links {
+    height: auto;
+    padding: 15px 30px;
+    color: #1a202c; 
+  }
+  
+  /* --- Mobile Dropdown Overrides --- */
+  .dropdown-item {
+      onMouseEnter: none;
+      onMouseLeave: none;
+  }
+  
+  .nav-dropdown-header {
+      justify-content: flex-start;
+      padding: 15px 30px;
+  }
+  
+  .nav-dropdown-header .dropdown-icon {
+      display: none; 
+  }
+  
+  .dropdown-mobile {
+    display: block; 
+  }
+  
+  .dropdown-link-mobile {
+    display: block;
+    padding: 8px 30px 8px 50px; 
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f7f7f7;
+    transition: background-color 0.2s;
+  }
+  
+  .dropdown-link-mobile:hover {
+    color: var(--secondary-cyan);
+    background-color: #eee;
+  }
+  /* --- Mobile Social & CTA Styling --- */
+  
+  .nav-item-mobile {
+    display: block;
+  }
+  
+  .social-mobile-container {
+      padding: 10px 30px;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+  }
+  
+  .social-nav.mobile {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+  }
+  
+  .social-nav.mobile .social-icon-nav {
+      color: #1a202c; 
+      font-size: 1.5rem;
+  }
+
+  .nav-item-mobile .cta-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}

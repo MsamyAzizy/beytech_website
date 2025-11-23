@@ -1,0 +1,122 @@
+/* src/components/ClientLogosSection.css */
+
+/* --- General Section Layout --- */
+
+.client-logos-wrapper {
+    /* Updated background color to match screenshot's dark theme */
+    background-color: #15171a; 
+    padding: 80px 0; /* Minimized padding/height */
+    color: #ffffff;
+    overflow: hidden; 
+}
+
+.client-logos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+}
+
+.cl-heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cl-subtext {
+    font-size: 1rem;
+    color: #a0a0a0;
+    max-width: 600px;
+    margin: 0 auto 50px auto; /* Margin to separate from logos */
+    line-height: 1.6;
+}
+
+/* --- Logo Carousel Structure and Animation --- */
+
+.logo-carousel {
+    display: flex;
+    overflow: hidden; 
+}
+
+.logo-track {
+    display: flex;
+    gap: 20px; /* Space between logos */
+    animation: scroll-left 30s linear infinite;
+    width: fit-content; 
+    padding-bottom: 10px; /* Space under the logos if needed */
+}
+
+/* Define the scrolling animation */
+@keyframes scroll-left {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%); 
+    }
+}
+
+/* Pause animation when the user hovers over the carousel */
+.logo-carousel:hover .logo-track {
+    animation-play-state: paused;
+}
+
+
+/* --- Individual Logo Card Styling --- */
+
+.logo-card {
+    flex-shrink: 0; 
+    width: 180px; 
+    height: 90px; /* Minimized height */
+    
+    /* Card styling matching the screenshot */
+    background-color: transparent; 
+    border: 1px solid #2e3034; /* Subtle dark border */
+    border-radius: 6px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-card:hover {
+    border-color: #4a4d51; /* Slightly lighter border on hover */
+    /* Optional subtle shadow on hover */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Styling for the text placeholders */
+.logo-card span {
+    font-size: 1.2rem; 
+    font-weight: 700;
+}
+
+/* Specific colors/styles for the placeholder text to mimic actual logos */
+.logo-dropbox { color: #0061ff; font-weight: 600; }
+.logo-facebook { color: #1877f2; font-weight: 700; }
+.logo-google { color: #4285f4; font-weight: 700; }
+.logo-heroku { color: #430098; font-weight: 700; }
+.logo-lenovo { color: #e21c21; font-weight: 700; }
+.logo-microsoft { color: #f25022; font-size: 1rem; font-weight: 600; } /* Microsoft is often smaller/textual */
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .cl-heading {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .client-logos-container {
+        padding: 0 20px;
+    }
+    .logo-card {
+        width: 150px; 
+        height: 70px;
+    }
+    .logo-track {
+        gap: 15px;
+    }
+}

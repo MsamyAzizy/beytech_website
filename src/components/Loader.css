@@ -1,0 +1,49 @@
+/* src/components/Loader.css */
+
+.loader-overlay {
+  position: fixed; /* Fixed to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff; /* White background as in the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's on top of everything */
+}
+
+.loader-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: repeat(3, 1fr); /* 3 rows */
+  gap: 6px; /* Space between squares */
+  width: 60px; /* Overall width of the grid */
+  height: 60px; /* Overall height of the grid */
+}
+
+.loader-square {
+  width: 18px; /* Size of each square */
+  height: 18px;
+  background-color: #1a202c; /* Dark blue/black color from your logo */
+  opacity: 0; /* Start invisible */
+  animation: square-fade 1.2s infinite ease-in-out; /* Main animation */
+}
+
+/* Delay for each square to create a wave effect */
+.loader-square:nth-child(1) { animation-delay: 0.1s; }
+.loader-square:nth-child(2) { animation-delay: 0.2s; }
+.loader-square:nth-child(3) { animation-delay: 0.3s; }
+.loader-square:nth-child(4) { animation-delay: 0.4s; }
+.loader-square:nth-child(5) { animation-delay: 0.5s; }
+.loader-square:nth-child(6) { animation-delay: 0.6s; }
+.loader-square:nth-child(7) { animation-delay: 0.7s; }
+.loader-square:nth-child(8) { animation-delay: 0.8s; }
+.loader-square:nth-child(9) { animation-delay: 0.9s; }
+
+
+/* Keyframe animation for the fade effect */
+@keyframes square-fade {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
