@@ -1,0 +1,201 @@
+/* src/components/AboutSection.css */
+
+/* --- Variables (Consistent Theme) --- */
+:root {
+    --primary-color: #3b82f6; 
+    --background-dark: #0f172a; 
+    --card-background: #1e293b; 
+    --text-light: #ffffff;
+    --text-medium: #94a3b8; 
+    --text-muted: #64748b;
+    --spacing-xl: 100px;
+    --spacing-lg: 60px;
+    --spacing-md: 30px;
+}
+
+/* ========================================================= */
+/* 1. Section Structure and Header */
+/* ========================================================= */
+
+.about-section-new {
+    background-color: var(--background-dark); 
+    padding: var(--spacing-xl) 0;
+    color: var(--text-light);
+}
+
+.about-content-wrapper-new {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+}
+
+/* Header Styling */
+.about-header-new {
+    margin-bottom: var(--spacing-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-title-new {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+.about-subtitle-new {
+    font-size: 1rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* ========================================================= */
+/* 2. Main Content (Image + Text) */
+/* ========================================================= */
+
+.about-main-content-new {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+    text-align: left;
+    margin-bottom: var(--spacing-xl);
+}
+
+.about-image-container-new {
+    flex: 1; 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.about-main-image-new {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.about-text-block-new {
+    flex: 1;
+    padding-left: var(--spacing-md);
+}
+
+.about-vision-heading-new {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.about-vision-description-new {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    margin-bottom: 15px;
+}
+
+.about-discover-button-new {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: var(--spacing-md);
+    transition: background-color 0.3s ease;
+}
+
+.about-discover-button-new:hover {
+    background-color: #2563eb;
+}
+
+/* ========================================================= */
+/* 3. Principles Grid (Bottom Cards) */
+/* ========================================================= */
+
+.about-principles-grid-new {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.principle-card-new {
+    background-color: var(--card-background);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.principle-card-new:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.principle-icon-new {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.principle-heading-new {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.principle-description-new {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-medium);
+}
+
+
+/* ========================================================= */
+/* 4. Responsive Adjustments */
+/* ========================================================= */
+
+@media (max-width: 1024px) {
+    .about-main-content-new {
+        flex-direction: column; /* Stack image and text */
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+    }
+    .about-text-block-new {
+        padding-left: 0;
+        margin-top: var(--spacing-md);
+    }
+    .about-vision-heading-new {
+        text-align: center;
+    }
+    .about-vision-description-new {
+        text-align: left; /* Keep paragraphs readable */
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section-new {
+        padding: 80px 0;
+    }
+    .about-content-wrapper-new {
+        padding: 0 20px;
+    }
+    .about-principles-grid-new {
+        grid-template-columns: 1fr; /* Stack principle cards */
+        gap: 20px;
+    }
+    .about-title-new {
+        font-size: 2rem;
+    }
+    .about-vision-heading-new {
+        font-size: 1.8rem;
+    }
+    .principle-card-new {
+        text-align: center;
+    }
+}

@@ -2,12 +2,14 @@
 import React from 'react';
 import Navbar from './Navbar'; 
 import Hero from './Hero'; 
-// Updated import: Removing the placeholder name and adding the concrete EventPromoSection
+// *** NEW IMPORT: About Section ***
+import AboutSection from './AboutSection'; 
 import EventPromoSection from './EventPromoSection'; 
 import ClientLogosSection from './ClientLogosSection'; 
 import TeamSection from './TeamSection'; 
 import ServicesSection from './ServicesSection'; 
-// *** NEW IMPORT ***
+// *** NEW IMPORT: Portfolio Section ***
+import PortfolioSection from './PortfolioSection'; 
 import ContactSection from './ContactSection'; 
 import Footer from './Footer'; 
 
@@ -18,12 +20,20 @@ const Home = () => {
       <main>
         <Hero />
         
+        {/* ADDED THE NEW ABOUT SECTION */}
+        
+        
         <ServicesSection />
         
         {/* Replaced TechFeatureSection with the specific EventPromoSection component */}
         <EventPromoSection /> 
+     
         
+        {/* ADDED THE NEW PORTFOLIO/PROJECTS SECTION */}
+        <PortfolioSection /> 
+           
         <ClientLogosSection /> 
+        <AboutSection />
         
         <TeamSection /> 
         

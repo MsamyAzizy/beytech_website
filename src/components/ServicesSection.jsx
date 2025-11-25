@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './ServicesSection.css';
 // *** NEW ICON IMPORTS ***
-import { FaCode, FaChartBar, FaPalette, FaBullhorn } from 'react-icons/fa';
+import { FaCode, FaChartBar, FaPalette, FaBullhorn } from 'react-icons/fa'; // FaBullhorn is back
 
 
 // --- Custom Hook for Persistent On-Scroll Visibility ---
@@ -14,9 +14,7 @@ const useVisibilityEffect = (options) => {
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
+            } 
         }, options);
 
         if (elementRef.current) {
@@ -40,69 +38,65 @@ const useVisibilityEffect = (options) => {
 const serviceItems = [
     { 
         id: '01', 
-        title: 'Custom Application Development', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem, in semper nisl bibendum eu. Duis pellentesque.',
-        // *** REPLACED WITH <FaCode /> ***
+        title: 'Full-Stack Software Development', 
+        description: 'We specialize in end-to-end development of web and mobile applications using modern frameworks like React, Next.js, and Node.js. We ensure your solution is secure, fast, and built to handle massive scale.',
         icon: <FaCode />, 
         hasColorBlock: false,
     },
     { 
         id: '02', 
-        title: 'Strategic Business Planning', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem, in semper nisl bibendum eu. Duis pellentesque.',
-        // *** REPLACED WITH <FaChartBar /> ***
-        icon: <FaChartBar />, 
+        title: 'Digital Product Design (UI/UX)', 
+        description: 'Our design process is rooted in user research and prototyping to create intuitive and engaging user interfaces (UI) that meet your business objectives and maximize conversion rates.',
+        icon: <FaPalette />, 
         hasColorBlock: true, 
     },
     { 
         id: '03', 
-        title: 'Brand & Identity Design', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem, in semper nisl bibendum eu. Duis pellentesque.',
-        // *** REPLACED WITH <FaPalette /> ***
-        icon: <FaPalette />, 
+        title: 'Data & Business Intelligence', 
+        description: 'Leverage your business data to make smarter decisions. We provide comprehensive data solutions, including setting up real-time analytics dashboards and implementing machine learning models.',
+        icon: <FaChartBar />, 
         hasColorBlock: false,
     },
     { 
         id: '04', 
+        // Restoring the original placeholder content for the fourth card
         title: 'Digital Marketing & SEO', 
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem, in semper nisl bibendum eu. Duis pellentesque.',
-        // *** REPLACED WITH <FaBullhorn /> (Megaphone) ***
         icon: <FaBullhorn />, 
         hasColorBlock: true,
     },
 ];
 
 const ServicesSection = () => {
-    // Observe the elements. Threshold: 0.1 means 10% must be visible.
-    const [headerRef, isHeaderVisible] = useVisibilityEffect({ threshold: 0.1 });
-    const [gridRef, isGridVisible] = useVisibilityEffect({ threshold: 0.1 });
-    const [ctaRef, isCtaVisible] = useVisibilityEffect({ threshold: 0.5 });
+    const [sectionRef, isSectionVisible] = useVisibilityEffect({ threshold: 0.1 });
     
+    // We update the grid class based on the number of cards (4 cards usually looks best in a 2x2 layout on desktop)
+    const gridColumnCountClass = serviceItems.length === 4 ? 'services-grid-4' : 'services-grid-auto'; 
+
 
     return (
-        <section className="services-section">
+        <section className="services-section" ref={sectionRef}>
             <div className="services-container">
                 {/* Section Header */}
-                <div ref={headerRef} className={`section-header ${isHeaderVisible ? 'is-visible' : 'initial-hidden'}`}>
+                <div className={`section-header ${isSectionVisible ? 'is-visible-header' : 'initial-hidden'}`}>
                     <p className="services-tagline">SERVICES</p>
                     <h2 className="services-heading">
-                        Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit
+                        Building Scalable, Future-Ready Applications
                     </h2>
                 </div>
 
-                {/* Services Grid (Observed by ref) */}
-                <div ref={gridRef} className="services-grid">
+                {/* Services Grid (Using the new class to handle 4 items) */}
+                <div className={`services-grid ${gridColumnCountClass}`}>
                     {serviceItems.map((service, index) => (
                         <div 
-                            className={`service-card ${isGridVisible ? 'is-visible' : 'initial-hidden'} ${service.hasColorBlock ? 'with-color-block' : ''} card-${index + 1}`} 
+                            className={`service-card ${isSectionVisible ? 'is-visible-card' : 'initial-hidden'} ${service.hasColorBlock ? 'with-color-block' : ''}`} 
                             key={service.id}
-                            style={isGridVisible ? { animationDelay: `${0.1 + index * 0.15}s` } : {}} 
+                            style={isSectionVisible ? { animationDelay: `${0.2 + index * 0.15}s` } : {}} 
                         >
                             {/* The colored sidebar for items 02 and 04 */}
                             {service.hasColorBlock && <div className="color-block"></div>}
 
                             <div className="card-content">
-                                {/* The icon now renders the React component */}
                                 <div className="card-icon">{service.icon}</div>
                                 <div className="card-text">
                                     <h3 className="card-title">{service.title}</h3>
@@ -115,20 +109,19 @@ const ServicesSection = () => {
                     ))}
                 </div>
 
-                {/* Bottom CTA Banner (Observed by ref) */}
-                <div ref={ctaRef} className={`cta-banner ${isCtaVisible ? 'is-visible' : 'initial-hidden'}`} style={isCtaVisible ? { animationDelay: '0.1s' } : {}}>
+                {/* Bottom CTA Banner */}
+                <div className={`cta-banner ${isSectionVisible ? 'is-visible-cta' : 'initial-hidden'}`} style={isSectionVisible ? { animationDelay: `${0.2 + serviceItems.length * 0.15}s` } : {}}>
                     <div className="cta-content">
-                        {/* Placeholder for person image */}
                         <div className="cta-image-placeholder"></div>
                         <div className="cta-text">
-                            <p className="cta-message">Need a Custom Solution?</p>
-                            <button className="cta-button">Contact Us</button>
+                            <p className="cta-message">Need a Custom Solution? Let's discuss your vision.</p>
+                            <button className="cta-button">Contact Us Now</button>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* Scroll-to-top button placeholder from image */}
-            <a href="#top" className="scroll-to-top">^</a>
+            {/* Scroll-to-top button placeholder */}
+            {isSectionVisible && <a href="#top" className="scroll-to-top">^</a>}
         </section>
     );
 };

@@ -29,10 +29,10 @@ const ClientLogosSection = () => {
     return (
         <div className="client-logos-wrapper">
             <div className="client-logos-container">
-                <h2 className="cl-heading">Our clients</h2>
+                <h2 className="cl-heading">Our Global Tech Partners</h2>
                 <p className="cl-subtext">
-                    Curabitur a felis in nunc fringilla tristique. Fusce egestas elit
-                    eget lorem. Etiam vitae tortor tortor.
+                    Driving innovation and scale across all sectors. We empower major companies 
+                    to optimize their cloud infrastructure and leverage cutting-edge AI solutions for competitive advantage.
                 </p>
 
                 <div className="logo-carousel">

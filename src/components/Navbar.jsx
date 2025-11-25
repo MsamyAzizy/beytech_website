@@ -147,7 +147,7 @@ const Navbar = () => {
           
           {/* 6. NEWS */}
           <li className="nav-item">
-            <a href="/news" className="nav-links" onClick={toggleDrawer}>NEWS</a>
+            <a href="/news" className="nav-links" onClick={toggleDrawer}>PRODUCTS</a>
           </li>
           
           {/* Social Icons for Mobile Drawer */}
@@ -155,9 +155,7 @@ const Navbar = () => {
             <SocialNav isMobile={true} />
           </li>
           
-          <li className="nav-item-mobile">
-             <button className="cta-button" onClick={toggleDrawer}>START</button>
-          </li>
+          
         </ul>
         
         {/* Social Icons for Desktop */}

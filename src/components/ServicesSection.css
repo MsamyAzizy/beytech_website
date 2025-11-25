@@ -43,7 +43,7 @@
 :root {
     --primary-blue: #003496; /* Dark Blue Accent for Services/Contact */
     --primary-teal: #009688; /* Teal Accent for Footer/Scroll Button */
-    --background-dark: #1a1d21;
+    --background-dark: #0f172a;
     --card-background: #26292e;
     --text-light: #ffffff;
     --text-medium: #a0a0a0;
@@ -86,7 +86,7 @@
 .services-section {
     /* *** MODIFIED FOR GRADIENT BACKGROUND *** */
     /* Uses radial gradient with the primary blue accent */
-    background: radial-gradient(circle at 10% 50%, rgba(22, 56, 119, 0.479) 0%, transparent 40%), rgb(5, 5, 5); 
+    background: #0f172a; 
     padding: 100px 0;
     position: relative;
     color: var(--text-light);

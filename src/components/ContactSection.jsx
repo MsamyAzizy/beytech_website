@@ -2,7 +2,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './ContactSection.css';
 // *** NEW ICON IMPORTS ***
-import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaStar, FaUserFriends, FaHourglassHalf, FaArrowRight } from 'react-icons/fa';
+import { IoIosMail } from "react-icons/io"; // Using IoIosMail for the small email icon
 
 // --- Custom Hook for Persistent On-Scroll Visibility (Unchanged) ---
 const useVisibilityEffect = (options) => {
@@ -36,121 +37,117 @@ const useVisibilityEffect = (options) => {
 // ------------------------------------------------------------------
 
 
-const contactInfo = [
+// Data for Contact and Statistics
+const contactDetails = [
     {
-        icon: <FaMapMarkerAlt />, 
-        title: 'Our Location',
-        // *** ACTUAL LOCATION: Lebanon Headquarters (Bauchrieh) ***
-        detail: 'Ground floor, 310 Mutran building, Bauchrieh, Lebanon',
-    },
-    {
-        icon: <FaEnvelope />, 
-        title: 'Email Us',
-        // *** ACTUAL EMAIL ***
+        icon: <IoIosMail />, // Small envelope icon
+        title: 'Email',
         detail: 'info@beytech.com.lb',
+        subtitle: 'We reply within 4 hours',
     },
     {
         icon: <FaPhone />, 
-        title: 'Call Us',
-        // Keeping placeholder phone, as the searched number is a WhatsApp number (71976382)
+        title: 'Phone',
         detail: '+961 (555) 123-4567', 
+        subtitle: 'Mon-Fri: 9AM-7PM EST',
     },
     {
-        icon: <FaClock />, 
-        title: 'Working Hours',
-        detail: 'Monday - Saturday: 9AM - 7PM',
+        icon: <FaMapMarkerAlt />, 
+        title: 'Office',
+        detail: 'Ground floor, 310 Mutran building, Bauchrieh, Lebanon',
+        subtitle: 'Visit us anytime',
     },
 ];
 
-const ContactSection = () => {
-    // Threshold set low to trigger animation early on scroll
-    const [headerRef, isHeaderVisible] = useVisibilityEffect({ threshold: 0.1 });
-    const [contentRef, isContentVisible] = useVisibilityEffect({ threshold: 0.2 });
+const statistics = [
+    { value: '2.5k+', label: 'Happy Clients', icon: <FaUserFriends /> },
+    { value: '4.9/5', label: 'Client Rating', icon: <FaStar /> },
+    { value: '15min', label: 'Avg. Response', icon: <FaHourglassHalf /> },
+];
 
-    // Simple form submission handler (prevent default for demo)
+const ContactSection = () => {
+    const [contentRef, isContentVisible] = useVisibilityEffect({ threshold: 0.1 });
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert('Message Sent (Placeholder)!');
+        alert('Project Started (Placeholder)!');
     };
 
-    // Google Maps iframe source for the Bauchrieh/Sin El-Fil area
-    const mapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.284488587114!2d35.5393665!3d33.8642738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f1754020a1c61%3A0x868c6f2a33111f67!2sSin%20El%20Fil%2FJdeideh%20Blvd!5e0!3m2!1sen!2slb!4v1700812800000!5m2!1sen!2slb";
-
     return (
-        <section className="contact-section">
+        <section className="contact-section new-style">
             <div className="contact-container">
                 
-                {/* Section Header */}
-                <div ref={headerRef} className={`contact-header ${isHeaderVisible ? 'is-visible-fade' : 'initial-hidden'}`}>
-                    <p className="contact-tagline">CONTACT</p>
-                    <h2 className="contact-heading">
-                        Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit
-                    </h2>
-                </div>
-
-                {/* Main Content Grid */}
+                {/* Main Content Grid: Left (Info) & Right (Form) */}
                 <div ref={contentRef} className="contact-content-grid">
                     
-                    {/* Left Column: Contact Information Card (Slides in from Left) */}
+                    {/* LEFT COLUMN: Header, Contact Details, and Stats */}
                     <div 
-                        className={`contact-info-card ${isContentVisible ? 'is-visible-left' : 'initial-hidden'}`} 
+                        className={`contact-info-column ${isContentVisible ? 'is-visible-left' : 'initial-hidden'}`} 
                         style={isContentVisible ? { animationDelay: '0.1s' } : {}}
                     >
-                        <div className="info-header">
-                            <h3 className="info-title">Contact Information</h3>
-                            <p className="info-description">
-                                Dignissimos delectus accusamus rerum voluptate. Dignissimos rerum et maiores reiciendis voluptate inventore ut.
+                        
+                        {/* Header/Tagline */}
+                        <div className="contact-header-left">
+                            <p className="contact-tagline">Let's Build Something Amazing</p>
+                            <h2 className="contact-heading-left">
+                                Ready to Transform Your Digital Presence?
+                            </h2>
+                            <p className="contact-intro-text">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
                             </p>
                         </div>
                         
-                        <div className="info-details">
-                            {contactInfo.map((item, index) => (
-                                <div key={index} className="detail-item">
-                                    {/* The icon now renders the React component */}
+                        {/* Detailed Contact Blocks */}
+                        <div className="detailed-contact-blocks">
+                            {contactDetails.map((item, index) => (
+                                <div key={index} className="contact-block">
                                     <div className="detail-icon">{item.icon}</div>
-                                    <div className="detail-text">
+                                    <div className="detail-text-new">
                                         <p className="detail-title">{item.title}</p>
-                                        <p className="detail-detail">{item.detail}</p>
+                                        <p className="detail-detail-new">{item.detail}</p>
+                                        <p className="detail-subtitle">{item.subtitle}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
+                        
+                        {/* Statistics Section */}
+                        <div className="contact-stats-grid">
+                            {statistics.map((stat, index) => (
+                                <div key={index} className="stat-item">
+                                    <h4 className="stat-value">{stat.value}</h4>
+                                    <p className="stat-label">{stat.label}</p>
+                                </div>
+                            ))}
+                        </div>
+
                     </div>
                     
-                    {/* Right Column: Map and Form (Slides in from Right) */}
+                    {/* RIGHT COLUMN: Start Your Project Form */}
                     <div 
-                        className={`map-form-column ${isContentVisible ? 'is-visible-right' : 'initial-hidden'}`} 
+                        className={`contact-form-column ${isContentVisible ? 'is-visible-right' : 'initial-hidden'}`} 
                         style={isContentVisible ? { animationDelay: '0.2s' } : {}}
                     >
                         
-                        {/* *** ACTUAL GOOGLE MAPS IFRAME *** */}
-                        <div className="map-placeholder">
-                            <iframe 
-                                src={mapSrc}
-                                width="100%" 
-                                height="100%" 
-                                style={{ border: 0 }} 
-                                allowFullScreen="" 
-                                loading="lazy" 
-                                referrerPolicy="no-referrer-when-downgrade"
-                                title="BeyTech Location Map"
-                            ></iframe>
-                        </div>
-
-                        {/* Send a Message Form */}
                         <div className="message-form-card">
-                            <h3 className="form-title">Send Us a Message</h3>
-                            <p className="form-description">
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit mauris hendrerit faucibus imperdiet nec eget felis.
+                            <h3 className="form-title-new">Start Your Project</h3>
+                            <p className="form-description-new">
+                                Tell us about your project and we'll get back to you with a tailored solution.
                             </p>
                             
-                            <form className="contact-form" onSubmit={handleSubmit}>
+                            <form className="contact-form-new" onSubmit={handleSubmit}>
                                 <input type="text" placeholder="Full Name" required />
                                 <input type="email" placeholder="Email Address" required />
                                 <input type="text" placeholder="Subject" required />
-                                <textarea placeholder="Message" rows="4" required></textarea>
-                                <button type="submit" className="send-button">Send Message</button>
+                                <textarea placeholder="Message" rows="5" required></textarea>
+                                <button type="submit" className="send-button-new">
+                                    Send Message <FaArrowRight style={{ marginLeft: '10px' }} />
+                                </button>
                             </form>
+                            
+                            <p className="form-security-text">
+                                Your information is secure and will never be shared.
+                            </p>
                         </div>
                     </div>
                 </div>

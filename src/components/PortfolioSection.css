@@ -1,0 +1,341 @@
+/* src/components/PortfolioSection.css */
+
+/* --- Variables (Consistent with other sections) --- */
+:root {
+    --primary-color: #3b82f6; 
+    --background-dark: #0f172a; 
+    --card-background: #1e293b; 
+    --text-light: #ffffff;
+    --text-medium: #94a3b8; 
+    --text-muted: #64748b;
+    --gap-size: 30px;
+    --animation-duration: 0.8s; 
+    --filter-animation-duration: 0.45s; /* IMPORTANT: Must match 450ms in JSX */
+}
+
+/* --- Standard On-Scroll Animation Keyframes --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.initial-hidden {
+    opacity: 0;
+}
+
+.is-visible-fade-up {
+    animation: fadeInUp var(--animation-duration) ease-out forwards;
+}
+
+/* ========================================================= */
+/* 1. Section Layout & Header */
+/* ========================================================= */
+
+.portfolio-section {
+    background-color: var(--background-dark);
+    padding: 100px 0;
+    color: var(--text-light);
+}
+
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* --- NEW HEADER STYLES --- */
+.portfolio-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto; /* Add margin below header */
+}
+
+.portfolio-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+.header-underline {
+    border: none;
+    border-top: 3px solid var(--primary-color);
+    width: 60px;
+    margin: 0 auto 20px auto; /* Center the underline */
+}
+
+.portfolio-description {
+    font-size: 1rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+/* --- END HEADER STYLES --- */
+
+
+/* ========================================================= */
+/* 2. Category Filter Buttons */
+/* ========================================================= */
+
+.category-filters {
+    display: flex;
+    justify-content: center; /* Center filters below the header */
+    flex-wrap: wrap; 
+    gap: 15px;
+    margin-bottom: 60px;
+}
+
+.filter-button {
+    background-color: transparent;
+    border: 1px solid var(--text-medium);
+    color: var(--text-medium);
+    padding: 10px 25px;
+    border-radius: 50px; 
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-button:hover:not(.active) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-button.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.filter-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ========================================================= */
+/* 3. Projects Grid & Ultra-Unique Animations */
+/* ========================================================= */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: var(--gap-size);
+    perspective: 1500px;
+}
+
+/* Animation for cards exiting (cross-cut out - Slicing away) */
+@keyframes crossCutOut {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1) skewX(0deg);
+    }
+    100% {
+        opacity: 0;
+        /* Unique Effect: Slides up-left, flips dramatically, shrinks significantly, and skews */
+        transform: translate3d(-150px, -50px, 200px) rotateX(45deg) rotateY(-45deg) scale(0.5) skewX(10deg); 
+    }
+}
+
+/* Animation for cards entering (cross-cut in - Slicing into view) */
+@keyframes crossCutIn {
+    0% {
+        opacity: 0;
+        /* Unique Effect: Starts far away, rotated opposite, and skewed */
+        transform: translate3d(150px, 50px, -200px) rotateX(-45deg) rotateY(45deg) scale(0.5) skewX(-10deg); 
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1) skewX(0deg);
+    }
+}
+
+.project-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex; 
+    flex-direction: column;
+    height: 100%; 
+    opacity: 0; 
+    transform-style: preserve-3d;
+    transform: translate3d(0, 0, 0); 
+    
+    animation-fill-mode: forwards; 
+    transition: transform var(--filter-animation-duration) ease-out; 
+}
+
+/* Applying the cross-cut animations */
+.project-card.animate-out-crosscut {
+    animation: crossCutOut var(--filter-animation-duration) ease-in forwards;
+}
+
+.project-card.animate-in-crosscut {
+    animation: crossCutIn var(--filter-animation-duration) ease-out forwards;
+}
+
+
+/* --- Card Inner Styles --- */
+
+.project-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 70%; 
+    overflow: hidden;
+}
+
+.project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+.corner-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(255, 255, 255, 0.15); 
+    color: var(--text-light);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+
+.project-info {
+    padding: 25px;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    margin-bottom: 10px;
+}
+
+.project-category {
+    font-weight: 500;
+    color: var(--primary-color); 
+}
+
+.project-year {
+    color: var(--text-muted);
+}
+
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: var(--text-light);
+}
+
+.project-description {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; 
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.project-tag {
+    background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.15); 
+    color: var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+
+.case-study-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: auto; 
+    transition: color 0.3s;
+}
+
+.case-study-link:hover {
+    color: #a7d9f9; 
+}
+
+.case-study-link svg {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.case-study-link:hover svg {
+    transform: translateX(5px);
+}
+
+/* ========================================================= */
+/* 5. Responsive Adjustments */
+/* ========================================================= */
+
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-container {
+        padding: 0 20px;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr; 
+    }
+    .category-filters {
+        justify-content: center; 
+    }
+    .portfolio-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-button {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+    .project-title {
+        font-size: 1.1rem;
+    }
+    .project-description {
+        font-size: 0.85rem;
+    }
+    .project-info {
+        padding: 15px;
+    }
+}

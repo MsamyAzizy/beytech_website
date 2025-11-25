@@ -2,7 +2,7 @@
 
 /* --- Variables (ADJUSTED FOR DARK THEME) --- */
 :root {
-    --dark-bg: rgb(8, 8, 8); /* Main background: dark */
+    --dark-bg: #0f172a; /*rgb(8, 8, 8); /* Main background: dark */
     --light-text: #ffffff; /* Main text: white */
     --light-grey-text: #a0a0a0; /* Secondary text: light grey */
     --blue-accent: #00bcd4; /* Cyan/Blue Accent (used for subheading now) */
