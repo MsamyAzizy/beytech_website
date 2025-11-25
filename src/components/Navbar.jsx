@@ -3,8 +3,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './Navbar.css';
 import mainLogo from '../assets/Main-Logo-01.png'; 
 // *** NEW ICON IMPORTS ***
-import { FaInstagram, FaDribbble, FaLinkedin, FaChevronDown } from 'react-icons/fa';
+// IMPORTED FaWhatsapp HERE
+import { FaInstagram, FaDribbble, FaLinkedin, FaChevronDown, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6'; 
+
+// WhatsApp Configuration
+const WHATSAPP_NUMBER = '+255762292250';
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}`; // Removes the '+' for the wa.me link
 
 // Social media data (shared with Footer)
 const socialLinks = [
@@ -12,6 +17,8 @@ const socialLinks = [
     { icon: <FaInstagram />, name: 'Instagram', href: 'https://www.beytech.co.tz', color: '#E1306C' },
     { icon: <FaDribbble />, name: 'Dribbble', href: 'https://www.beytech.co.tz', color: '#EA4C89' },
     { icon: <FaLinkedin />, name: 'LinkedIn', href: 'https://www.beytech.co.tz', color: '#0077B5' },
+    // ADDED WHATSAPP LINK
+    { icon: <FaWhatsapp />, name: 'WhatsApp', href: WHATSAPP_LINK, color: '#25D366' },
 ];
 
 // Dropdown items for the SERVICES link
@@ -31,8 +38,8 @@ const SocialNav = ({ isMobile }) => (
                 href={link.href} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="social-icon-nav"
-                aria-label={`Follow on ${link.name}`}
+                className={`social-icon-nav ${link.name === 'WhatsApp' ? 'whatsapp-icon' : ''}`}
+                aria-label={`Follow/Contact on ${link.name}`}
             >
                 {link.icon}
             </a>

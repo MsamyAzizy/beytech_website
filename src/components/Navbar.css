@@ -386,4 +386,7 @@
     width: 100%;
     max-width: 250px;
   }
+  .whatsapp-icon {
+    color: #25D366 !important; /* Forces the WhatsApp green */
+}
 }

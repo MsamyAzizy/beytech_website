@@ -1,0 +1,241 @@
+/* src/components/AboutBey.css */
+
+/* --- Variables (Consistent Theme) --- */
+:root {
+    --primary-color: #3b82f6; 
+    --background-dark: #0f172a; 
+    --text-dark: #333; /* Used for the white background areas */
+    --text-light: #ffffff;
+    --text-medium: #6c757d; 
+    --border-color: #ccc;
+    --spacing-xl: 120px;
+    --spacing-lg: 80px;
+    --spacing-md: 40px;
+}
+
+/* Base Styles */
+.about-bey-page {
+    min-height: 100vh;
+}
+
+.about-main-content-area {
+    background-color: var(--text-light); /* White background for the content sections */
+}
+
+/* ========================================================= */
+/* 1. Hero Section: "Who We Are" Header */
+/* ========================================================= */
+
+.about-hero-section {
+    position: relative;
+    background-color: #333; /* Fallback background color if video fails to load */
+    height: 400px;
+    /* These three lines ensure perfect centering of the content */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    color: var(--text-light);
+    text-align: center;
+    overflow: hidden; 
+}
+
+.hero-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transform: translate(-50%, -50%);
+    z-index: 1; 
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Using your dark theme color with 80% opacity */
+    background-color: rgba(15, 23, 42, 0.8); 
+    z-index: 2; 
+}
+
+.hero-content {
+    position: relative; 
+    z-index: 3;
+    /* flex-direction: column and align-items: center ensures the title and tagline stack and center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px; 
+}
+
+.hero-title-mains{
+    font-size:30px;
+}
+
+.hero-title-main {
+    font-size: 2.5rem;
+    font-weight: 800;
+    /* FIX: Set a standard, small margin to keep distance from tagline */
+    margin-bottom: -205px; 
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-tagline {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ========================================================= */
+/* 2. Intro Section: "ABOUT US" */
+/* ========================================================= */
+
+.about-intro-section {
+    background-color: var(--text-light);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.intro-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.intro-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.intro-underline {
+    border: none;
+    border-top: 3px solid var(--primary-color);
+    width: 60px;
+    margin: 0 auto 20px auto;
+}
+
+.intro-description {
+    font-size: 1.2rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+/* ========================================================= */
+/* 3. Details Section: Story and Services */
+/* ========================================================= */
+
+.about-details-section {
+    background-color: var(--text-light);
+    padding: 0 0 var(--spacing-xl) 0;
+}
+
+.details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+}
+
+.details-image-container {
+    flex-basis: 40%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.details-main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.details-text-container {
+    flex-basis: 60%;
+    text-align: left;
+}
+
+.text-block {
+    margin-bottom: var(--spacing-md);
+}
+
+.story-heading, .service-heading {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.service-heading {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-top: 15px;
+}
+
+.story-paragraph, .service-paragraph {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+/* ========================================================= */
+/* 4. Responsive Adjustments */
+/* ========================================================= */
+
+@media (max-width: 1024px) {
+    .details-container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    .details-image-container {
+        width: 100%;
+        order: 1; 
+    }
+    .details-text-container {
+        width: 100%;
+        order: 2;
+    }
+    .about-hero-section {
+        height: 300px;
+    }
+    .hero-background-video {
+        width: auto; 
+        height: 100%;
+        min-width: 100%; 
+    }
+    .hero-title-main {
+        font-size: 3rem;
+    }
+    .hero-tagline {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content-wrapper-new {
+        padding: 0 20px;
+    }
+    .hero-title-main {
+        font-size: 2.5rem;
+    }
+    .hero-tagline {
+        font-size: 1.1rem;
+    }
+    .story-heading {
+        font-size: 1.6rem;
+    }
+    .service-heading {
+        font-size: 1.3rem;
+    }
+}

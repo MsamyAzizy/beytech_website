@@ -1,29 +1,48 @@
 // src/App.jsx
-import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // *** NEW: Import Router components ***
+
 import Home from './components/Home';
-import Loader from './components/Loader'; // Import the Loader component
+// *** NEW: Import the AboutBey component ***
+import AboutBey from './components/AboutBey'; 
+import Footer from './components/Footer'; // Assuming Footer is needed outside the Loader
+
+import Loader from './components/Loader';
 import './index.css';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true); // Set initial loading state to true
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Simulate a network request or content loading time
     const timer = setTimeout(() => {
-      setIsLoading(false); // After 3 seconds, set loading to false
-    }, 3500); // Adjust this duration as needed
+      setIsLoading(false); 
+    }, 3500); 
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
 
+  // --- Render Logic ---
+  if (isLoading) {
+    return <Loader />; // Show Loader on its own while loading
+  }
+
+  // Show the main application structure (with routing) once loading is complete
   return (
-    <>
-      {isLoading ? (
-        <Loader /> // Show loader if still loading
-      ) : (
-        <Home /> // Show Home component when loading is complete
-      )}
-    </>
+    <Router>
+      
+      <Routes>
+        {/* Route for the homepage */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Route for the new About page */}
+        <Route path="/about" element={<AboutBey />} /> 
+        
+        {/* You can add more routes here (e.g., path="/services") */}
+      </Routes>
+      
+      <Footer /> {/* Footer stays outside Routes to appear on all pages */}
+    </Router>
   );
 }
 
