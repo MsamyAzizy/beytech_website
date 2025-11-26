@@ -59,8 +59,10 @@ const TeamSection = () => {
                         <h2 className="team-title-new">Our Professional Team</h2>
                         <hr className="header-underline" />
                         <p className="team-description-new">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus luctus nec 
-                            ullamcorper mattis, pulvinar dapibus leo.
+                            We have achieved remarkable success in a short time, 
+                            fostering a purpose-driven and inspired culture where teams 
+                            collaborate seamlessly toward shared goals.
+
                         </p>
                     </div>
                     

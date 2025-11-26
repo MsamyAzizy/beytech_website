@@ -10,9 +10,9 @@ import tempImg2 from "../assets/CCTV.jpeg";
 import tempImg3 from "../assets/IOT.jpeg";
 
 const TYPING_TEXTS = [
-  "Welcome Bey Technologies",
-  "Best ERP Suite For Your Business",
-  "Microfinance | Pharmacy | Petrol Station | Restaurant",
+  "Bey Technologies Company",
+  "For Best ERP Suite For Your Business",
+  "Microfinance | Pharmacy | Petrol Station | Restaurant | Hospital",
 ];
 
 const RIGHT_CARDS = [

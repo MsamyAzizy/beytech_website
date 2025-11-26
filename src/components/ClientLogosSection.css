@@ -1,122 +1,214 @@
 /* src/components/ClientLogosSection.css */
 
-/* --- General Section Layout --- */
+:root {
+    --cta-blue: #00bcd4; /* Cyan/Teal Accent for CTA button */
+    --logo-strip-light: transparent; /* TRANSPARENT */
+    --max-content-width: 1200px; /* Define a max width for centering */
+}
 
-.client-logos-wrapper {
-    /* Updated background color to match screenshot's dark theme */
-    background-color: #0f172a; 
-    padding: 80px 0; /* Minimized padding/height */
-    color: #ffffff;
+/* --- Main Section (Video Background) --- */
+.client-map-section {
+    position: relative;
+    height: 450px; 
     overflow: hidden; 
-}
-
-.client-logos-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    text-align: center;
-}
-
-.cl-heading {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.cl-subtext {
-    font-size: 1rem;
-    color: #a0a0a0;
-    max-width: 600px;
-    margin: 0 auto 50px auto; /* Margin to separate from logos */
-    line-height: 1.6;
-}
-
-/* --- Logo Carousel Structure and Animation --- */
-
-.logo-carousel {
-    display: flex;
-    overflow: hidden; 
-}
-
-.logo-track {
-    display: flex;
-    gap: 20px; /* Space between logos */
-    animation: scroll-left 30s linear infinite;
-    width: fit-content; 
-    padding-bottom: 10px; /* Space under the logos if needed */
-}
-
-/* Define the scrolling animation */
-@keyframes scroll-left {
-    from {
-        transform: translateX(0%);
-    }
-    to {
-        transform: translateX(-50%); 
-    }
-}
-
-/* Pause animation when the user hovers over the carousel */
-.logo-carousel:hover .logo-track {
-    animation-play-state: paused;
-}
-
-
-/* --- Individual Logo Card Styling --- */
-
-.logo-card {
-    flex-shrink: 0; 
-    width: 180px; 
-    height: 90px; /* Minimized height */
-    
-    /* Card styling matching the screenshot */
-    background-color: transparent; 
-    border: 1px solid #2e3034; /* Subtle dark border */
-    border-radius: 6px;
+    background-color: #000; 
     
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Oswald', sans-serif; 
 }
 
-.logo-card:hover {
-    border-color: #4a4d51; /* Slightly lighter border on hover */
-    /* Optional subtle shadow on hover */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+/* --- Background Video Styles --- */
+.cl-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transform: translate(-50%, -50%);
+    z-index: 0; 
 }
 
-/* Styling for the text placeholders */
-.logo-card span {
-    font-size: 1.2rem; 
-    font-weight: 700;
+/* Overlay to ensure text readability over the video */
+.cl-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1; 
 }
 
-/* Specific colors/styles for the placeholder text to mimic actual logos */
-.logo-dropbox { color: #0061ff; font-weight: 600; }
-.logo-facebook { color: #1877f2; font-weight: 700; }
-.logo-google { color: #4285f4; font-weight: 700; }
-.logo-heroku { color: #430098; font-weight: 700; }
-.logo-lenovo { color: #e21c21; font-weight: 700; }
-.logo-microsoft { color: #f25022; font-size: 1rem; font-weight: 600; } /* Microsoft is often smaller/textual */
+/* --- Overlay/Content Container (holds the text and logo strip) --- */
+.client-map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.client-map-content {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px; 
+    max-width: var(--max-content-width);
+    text-align: center;
+}
+
+/* --- Text & CTA Styling --- */
+.cl-heading {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.cl-cta-button {
+    background-color: var(--cta-blue);
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cl-cta-button:hover {
+    background-color: #008c99;
+}
+
+/* --- Logo Strip at the Bottom (Animated Carousel) --- */
+
+/* 💥 CHANGE 1: Outer container for centering the entire logo block */
+.client-logo-strip-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0; /* Add vertical space below CTA */
+}
+
+.client-logo-strip-wrapper {
+    /* 💥 CHANGE 2: Set Max-Width and center the wrapper */
+    max-width: var(--max-content-width); 
+    width: 100%; /* Must take up available width within outer container */
+    margin: 0 auto; 
+    
+    background-color: var(--logo-strip-light); /* Transparent */
+    height: 100px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3; 
+    overflow: hidden; 
+    position: relative; 
+    
+    /* Fading gradient to hide the start/end of the loop within the max-width area */
+    mask-image: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        black 5%, 
+        black 95%, 
+        transparent 100%
+    );
+}
+
+.client-logo-carousel {
+    /* No changes needed here, keeps track centered */
+    width: 100%; 
+    overflow: hidden;
+    white-space: nowrap; 
+    display: flex;
+    justify-content: center; 
+}
+
+.logo-track {
+    display: flex;
+    gap: 40px; 
+    animation: scroll-left 40s linear infinite; 
+    width: fit-content; 
+    padding: 0; 
+}
+
+/* Pause animation on hover */
+.client-logo-strip-wrapper:hover .logo-track {
+    animation-play-state: paused;
+}
+
+/* Define the scrolling animation */
+@keyframes scroll-left {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); } 
+}
 
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 992px) {
-    .cl-heading {
-        font-size: 2.2rem;
+.logo-strip-item {
+    flex-shrink: 0;
+    width: 150px; 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+}
+
+.client-logo-image {
+    max-height: 80px; 
+    width: auto;
+    max-width: 100%;
+    /* Shows original logo colors */
+    opacity: 0.9; 
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.logo-strip-item:hover .client-logo-image {
+    opacity: 1; 
+    transform: scale(1.05); 
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .client-map-section {
+        height: 350px; 
     }
-}
-
-@media (max-width: 600px) {
-    .client-logos-container {
+    .cl-heading {
+        font-size: 1.5rem;
         padding: 0 20px;
     }
-    .logo-card {
-        width: 150px; 
-        height: 70px;
+    .client-logo-strip-wrapper {
+        height: 80px;
+        /* Adjust mask for smaller screens */
+        mask-image: linear-gradient(
+            90deg, 
+            transparent 0%, 
+            black 5%, 
+            black 95%, 
+            transparent 100%
+        );
     }
     .logo-track {
-        gap: 15px;
+        gap: 30px; 
+        animation-duration: 30s; 
+    }
+    .logo-strip-item {
+        width: 120px;
+    }
+    .client-logo-image {
+        max-height: 60px; 
     }
 }

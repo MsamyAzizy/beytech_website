@@ -1,55 +1,72 @@
 // src/components/ClientLogosSection.jsx
 import React from 'react';
 import './ClientLogosSection.css';
+import BeyVideo from '../assets/bey.mp4'; // Imported background video
 
-// Placeholder imports for actual SVG logos:
-// import dropboxLogo from '../assets/dropbox.svg'; 
-// import facebookLogo from '../assets/facebook.svg';
-// import googleLogo from '../assets/google.svg';
-// import herokuLogo from '../assets/heroku.svg';
-// import lenovoLogo from '../assets/lenovo.svg';
-// import microsoftLogo from '../assets/microsoft.svg';
+// Imported client logos
+import AfrinnexLogo from '../assets/Afrimex_Financing-removebg-preview.png';
+import EETLogo from '../assets/E-AND-E-TRANSPOTERS-LIMITED.png';
+import JofachLogo from '../assets/Jofach-Financial-Services.png';
+import KinokoLogo from '../assets/kinoko-logo.png';
+import ScreenshotLogo from '../assets/Screenshot_from_2025-01-25_14-41-57-removebg-preview.png';
+import TaxDeanLogo from '../assets/Tax-Dean-Associates.png';
+import VFPLogo from '../assets/VFP-LOGO-TRANSPARENT-1.png';
 
 
 const clientData = [
-    // Use names/text for placeholders until actual SVGs are imported
-    { name: "Dropbox", icon: "Dropbox", textClass: "logo-dropbox" },
-    { name: "Facebook", icon: "facebook", textClass: "logo-facebook" },
-    { name: "Google", icon: "Google", textClass: "logo-google" },
-    { name: "Heroku", icon: "Heroku", textClass: "logo-heroku" },
-    { name: "Lenovo", icon: "Lenovo", textClass: "logo-lenovo" },
-    { name: "Microsoft", icon: "Microsoft", textClass: "logo-microsoft" },
+    { name: "Afrinnex Financing", logoSrc: AfrinnexLogo },
+    { name: "Tax Dean Associates", logoSrc: TaxDeanLogo },
+    { name: "Jofach Financial Services", logoSrc: JofachLogo },
+    { name: "E&E Transporters", logoSrc: EETLogo },
+    { name: "VFP Logo", logoSrc: VFPLogo },
+    { name: "Kinoko Logo", logoSrc: KinokoLogo },
+    { name: "Screenshot Logo", logoSrc: ScreenshotLogo },
 ];
 
-// Create the full track array (unique logos + duplicate logos for seamless loop)
-const clientLogos = [...clientData, ...clientData];
+const clientLogosForAnimation = [...clientData, ...clientData];
 
 
 const ClientLogosSection = () => {
     return (
-        <div className="client-logos-wrapper">
-            <div className="client-logos-container">
-                <h2 className="cl-heading">Our Global Tech Partners</h2>
-                <p className="cl-subtext">
-                    Driving innovation and scale across all sectors. We empower major companies 
-                    to optimize their cloud infrastructure and leverage cutting-edge AI solutions for competitive advantage.
-                </p>
+        <section className="client-map-section">
+            
+            {/* Background Video and Overlay */}
+            <video autoPlay loop muted playsInline className="cl-background-video">
+                <source src={BeyVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div className="cl-video-overlay"></div> 
+            
+            <div className="client-map-overlay">
+                
+                <div className="client-map-content">
+                    <h2 className="cl-heading">
+                        Trusted by companies small and large around the globe
+                    </h2>
+                    
+                    {/* Centered CTA Button */}
+                    <button className="cl-cta-button">
+                        See our customer stories
+                    </button>
+                </div>
 
-                <div className="logo-carousel">
-                    {/* The logo-track element is where the scrolling animation is applied */}
-                    <div className="logo-track">
-                        {clientLogos.map((client, index) => (
-                            <div className="logo-card" key={index}>
-                                {/* Using <span> with specific class for placeholder text/color styling */}
-                                <span className={client.textClass}>{client.icon}</span>
-                                {/* If actual images were imported, you would use: 
-                                <img src={client.logoSrc} alt={client.name} /> */}
+                {/* Logo Strip Container at the bottom of the section */}
+                {/* 💥 NEW: Outer container for centering */}
+                <div className="client-logo-strip-outer"> 
+                    <div className="client-logo-strip-wrapper">
+                        <div className="client-logo-carousel">
+                            <div className="logo-track">
+                                {clientLogosForAnimation.map((client, index) => (
+                                    <div className="logo-strip-item" key={index}>
+                                        <img src={client.logoSrc} alt={client.name} className="client-logo-image" />
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

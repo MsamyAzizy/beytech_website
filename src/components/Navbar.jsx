@@ -23,10 +23,13 @@ const socialLinks = [
 
 // Dropdown items for the SERVICES link
 const serviceDropdownItems = [
-    { title: 'Service Feature 1', href: '/services/feature1' },
-    { title: 'Service Feature 2', href: '/services/feature2' },
-    { title: 'Service Feature 3', href: '/services/feature3' },
-    { title: 'Service Feature 4', href: '/services/feature4' },
+    // 💥 Updated link for the new Odoo page
+    { title: 'Odoo ERP Implementation', href: '/services/odoo-erp' },
+    { title: 'Software Development', href: '/' },
+    { title: 'Digital Marketing', href: '/' },
+    { title: 'Mobile Application Development', href: '/' },
+    { title: 'Enterprise Application Development', href: '/' },
+    { title: 'System Intergration', href: '/' },
 ];
 
 // Helper Component for Social Icons

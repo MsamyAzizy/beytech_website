@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './ServicesSection.css';
 // *** NEW ICON IMPORTS ***
-import { FaCode, FaChartBar, FaPalette, FaBullhorn } from 'react-icons/fa'; // FaBullhorn is back
+import { FaCode, FaChartBar, FaPalette, FaBullhorn, FaCloud, FaShieldAlt } from 'react-icons/fa'; // FaCloud and FaShieldAlt added
 
 
 // --- Custom Hook for Persistent On-Scroll Visibility ---
@@ -57,11 +57,27 @@ const serviceItems = [
         icon: <FaChartBar />, 
         hasColorBlock: false,
     },
+    // 💥 NEW CARD 4
     { 
         id: '04', 
-        // Restoring the original placeholder content for the fourth card
-        title: 'Digital Marketing & SEO', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem, in semper nisl bibendum eu. Duis pellentesque.',
+        title: 'Cloud Infrastructure & DevOps', 
+        description: 'Implement scalable and resilient cloud solutions (AWS, Azure, GCP) using Infrastructure as Code (IaC). We automate deployment pipelines for faster, reliable releases.',
+        icon: <FaCloud />, 
+        hasColorBlock: true,
+    },
+    // 💥 NEW CARD 5
+    { 
+        id: '05', 
+        title: 'Cybersecurity & Compliance', 
+        description: 'Protect your assets with advanced threat detection, vulnerability management, and robust security architecture designed to meet industry compliance standards (e.g., GDPR, HIPAA).',
+        icon: <FaShieldAlt />, 
+        hasColorBlock: false,
+    },
+    // 💥 NEW CARD 6
+    { 
+        id: '06', 
+        title: 'Digital Marketing & Growth', 
+        description: 'Drive targeted traffic and increase conversions through expert SEO optimization, targeted paid campaigns, and performance-based content strategy.',
         icon: <FaBullhorn />, 
         hasColorBlock: true,
     },
@@ -70,8 +86,8 @@ const serviceItems = [
 const ServicesSection = () => {
     const [sectionRef, isSectionVisible] = useVisibilityEffect({ threshold: 0.1 });
     
-    // We update the grid class based on the number of cards (4 cards usually looks best in a 2x2 layout on desktop)
-    const gridColumnCountClass = serviceItems.length === 4 ? 'services-grid-4' : 'services-grid-auto'; 
+    // 💥 UPDATED LOGIC: If 6 items, use the 3-column grid class
+    const gridColumnCountClass = serviceItems.length === 6 ? 'services-grid-6' : 'services-grid-auto'; 
 
 
     return (
@@ -85,13 +101,14 @@ const ServicesSection = () => {
                     </h2>
                 </div>
 
-                {/* Services Grid (Using the new class to handle 4 items) */}
+                {/* Services Grid (Using the new class to handle 6 items) */}
                 <div className={`services-grid ${gridColumnCountClass}`}>
                     {serviceItems.map((service, index) => (
                         <div 
                             className={`service-card ${isSectionVisible ? 'is-visible-card' : 'initial-hidden'} ${service.hasColorBlock ? 'with-color-block' : ''}`} 
                             key={service.id}
-                            style={isSectionVisible ? { animationDelay: `${0.2 + index * 0.15}s` } : {}} 
+                            // Adjusting animation delay based on 6 items
+                            style={isSectionVisible ? { animationDelay: `${0.2 + index * 0.1}s` } : {}} 
                         >
                             {/* The colored sidebar for items 02 and 04 */}
                             {service.hasColorBlock && <div className="color-block"></div>}
@@ -110,7 +127,7 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Bottom CTA Banner */}
-                <div className={`cta-banner ${isSectionVisible ? 'is-visible-cta' : 'initial-hidden'}`} style={isSectionVisible ? { animationDelay: `${0.2 + serviceItems.length * 0.15}s` } : {}}>
+                <div className={`cta-banner ${isSectionVisible ? 'is-visible-cta' : 'initial-hidden'}`} style={isSectionVisible ? { animationDelay: `${0.2 + serviceItems.length * 0.1}s` } : {}}>
                     <div className="cta-content">
                         <div className="cta-image-placeholder"></div>
                         <div className="cta-text">

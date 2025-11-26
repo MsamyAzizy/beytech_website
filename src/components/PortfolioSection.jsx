@@ -210,7 +210,7 @@ const PortfolioSection = () => {
                                         <span className="project-category">{project.category}</span>
                                         <span className="project-year">{project.year}</span>
                                     </div>
-                                    <h3 className="project-title">{project.title}</h3>
+                                    <h3 className="projeAct-title">{project.title}</h3>
                                     <p className="project-description">{project.description}</p>
                                     <div className="project-tags">
                                         {project.tags.map((tag, tagIndex) => (

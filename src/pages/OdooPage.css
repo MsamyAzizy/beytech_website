@@ -1,0 +1,196 @@
+/* src/pages/OdooPage.css */
+
+/* --- Variables (Consistent Theme) --- */
+:root {
+    --primary-color: #3b82f6; 
+    /* 💥 MODIFIED: Changed the base dark background for the gradient effect */
+    --background-dark: #0f172a; /* Keeping a deep charcoal/navy as a base */
+    --text-light: #ffffff;
+    --text-medium: #94a3b8; 
+    --text-dark: #000000;
+    --spacing-xl: 100px;
+    --spacing-lg: 60px;
+    --spacing-md: 30px;
+    --smooth-ease: cubic-bezier(.25, .46, .45, .94);
+    --animation-duration: 0.8s;
+
+    /* 💥 NEW: Additional dark colors for gradient */
+    --gradient-dark-start: #0a0e1a; /* Even darker, almost black */
+    --gradient-dark-end: #1a233b; /* A slightly lighter, deep blue-grey */
+}
+
+/* --- Animation States (Re-used from Contact Section) --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.initial-hidden {
+    opacity: 0;
+}
+
+.is-visible-fade {
+    animation: fadeInUp var(--animation-duration) var(--smooth-ease) forwards;
+}
+
+/* ========================================================= */
+/* 1. Page Structure */
+/* ========================================================= */
+
+.odoo-page-container {
+    /* 💥 MODIFIED: Applied a subtle linear gradient background */
+    background: linear-gradient(180deg, var(--gradient-dark-start) 0%, var(--gradient-dark-end) 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    /* Fallback for older browsers if gradient not supported */
+    background-color: var(--background-dark); 
+}
+
+.odoo-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg) 40px var(--spacing-xl) 40px;
+}
+
+/* Hero Header (Black background as per image) */
+.odoo-hero-header {
+    background-color: var(--text-dark); /* This specific header remains pure black */
+    padding: 100px 0 50px 0; 
+    text-align: center;
+}
+
+.odoo-main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Intro Text */
+.odoo-intro-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    text-align: center;
+    max-width: 800px;
+    margin: var(--spacing-md) auto var(--spacing-lg) auto;
+}
+
+/* ========================================================= */
+/* 2. Main Grid Layout */
+/* ========================================================= */
+
+.odoo-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; 
+    gap: var(--spacing-lg);
+    align-items: flex-start; 
+    padding-top: var(--spacing-md);
+}
+
+/* --- Left Column (Images) --- */
+.odoo-left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: 0 40px; 
+}
+
+.odoo-image-block {
+    text-align: center;
+    width: 100%;
+}
+
+.odoo-certified-image,
+.odoo-partner-logo {
+    max-width: 100%;
+    height: auto;
+    max-width: 250px; 
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    margin-top: 5px;
+}
+
+/* --- Right Column (Text Content) --- */
+.odoo-right-column {
+    padding-right: var(--spacing-md); 
+}
+
+.module-detail-block {
+    margin-bottom: var(--spacing-lg);
+}
+
+.module-title-underline {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.module-title-underline::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px; 
+    transform: translateY(-50%);
+    width: 10px; 
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.odoo-right-column p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    margin-bottom: 15px;
+}
+
+/* ========================================================= */
+/* 3. Responsive Adjustments (Unchanged) */
+/* ========================================================= */
+
+@media (max-width: 900px) {
+    .odoo-main-grid {
+        grid-template-columns: 1fr; 
+        gap: 40px;
+    }
+    .odoo-left-column {
+        padding: 0;
+        flex-direction: row; 
+        justify-content: space-around;
+        gap: 20px;
+    }
+    .odoo-right-column {
+        padding: 0;
+    }
+    .module-title-underline::before {
+        left: -15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .odoo-content-wrapper {
+        padding: var(--spacing-md) 20px var(--spacing-lg) 20px;
+    }
+    .odoo-hero-header {
+        padding: 80px 0 40px 0;
+    }
+    .odoo-main-title {
+        font-size: 2.5rem;
+    }
+    .odoo-left-column {
+        flex-direction: column; 
+    }
+    .odoo-certified-image,
+    .odoo-partner-logo {
+        max-width: 180px;
+    }
+    .module-title-underline {
+        font-size: 1.5rem;
+    }
+}

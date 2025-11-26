@@ -69,6 +69,8 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* 💥 CHANGE 1: Set the image container to the second position (order: 2) */
+    order: 2;
 }
 
 .about-main-image-new {
@@ -79,7 +81,11 @@
 
 .about-text-block-new {
     flex: 1;
-    padding-left: var(--spacing-md);
+    /* 💥 CHANGE 2: Set the text container to the first position (order: 1) */
+    order: 1;
+    /* 💥 ADJUSTMENT: Change padding from left to right for better spacing */
+    padding-left: 0;
+    padding-right: var(--spacing-md); 
 }
 
 .about-vision-heading-new {
@@ -166,8 +172,13 @@
         text-align: center;
         margin-bottom: var(--spacing-lg);
     }
+    /* 💥 RESET ORDERING for mobile (so text comes first) */
+    .about-image-container-new {
+        order: initial;
+    }
     .about-text-block-new {
-        padding-left: 0;
+        order: initial;
+        padding-right: 0; /* Reset padding right */
         margin-top: var(--spacing-md);
     }
     .about-vision-heading-new {

@@ -2,31 +2,11 @@
 
 /* --- Keyframes for Smoother Animation --- */
 
-/* Card 1 & 3 (Left column) slides right */
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(-30px); 
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+/* Card 1 & 3 (Left column) slides right - REMOVED */
 
-/* Card 2 & 4 (Right column) slides left */
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+/* Card 2 & 4 (Right column) slides left - REMOVED */
 
-/* Header and CTA simple fade up */
+/* Header, CTA, and Cards will now use fade up */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -59,33 +39,16 @@
 
 /* 2. Visible State (after scrolling into view) */
 
-/* Fallback/Default for Header and CTA */
-.is-visible {
+/* 💥 CHANGE: All visible elements now use fadeInUp for simplicity */
+.is-visible-header, 
+.is-visible-cta,
+.is-visible-card {
     animation: fadeInUp var(--animation-duration) var(--smooth-ease) forwards;
-}
-
-/* Specific card animation to make them "meet" */
-.card-1.is-visible, 
-.card-3.is-visible {
-    animation-name: slideInRight;
-    animation-duration: var(--animation-duration);
-    animation-timing-function: var(--smooth-ease); 
-    animation-fill-mode: forwards;
-}
-
-.card-2.is-visible, 
-.card-4.is-visible {
-    animation-name: slideInLeft;
-    animation-duration: var(--animation-duration);
-    animation-timing-function: var(--smooth-ease); 
-    animation-fill-mode: forwards;
 }
 
 
 /* --- General Section Layout --- */
 .services-section {
-    /* *** MODIFIED FOR GRADIENT BACKGROUND *** */
-    /* Uses radial gradient with the primary blue accent */
     background: #0f172a; 
     padding: 100px 0;
     position: relative;
@@ -93,7 +56,7 @@
 }
 
 .services-container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 0 40px;
 }
@@ -123,16 +86,26 @@
 /* --- Services Grid --- */
 .services-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
+
+/* 💥 CHANGE 1: Default grid layout for 4 items (fallback) */
+.services-grid-auto {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* 💥 CHANGE 2: New 3-column layout for 6 items */
+.services-grid-6 {
+    grid-template-columns: 1fr 1fr 1fr; /* Sets 3 cards per row */
+}
+
 
 .service-card {
     background-color: var(--card-background);
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    /* transition: transform 0.3s ease; */
+    transition: transform 0.3s ease;
 }
 
 .service-card:hover {
@@ -146,7 +119,6 @@
 }
 
 .with-color-block .card-content {
-    /* Adjusted padding */
     padding-left: 15px; 
 }
 
@@ -157,7 +129,6 @@
     left: 0;
     width: 10px; 
     height: 100%;
-    /* CONSISTENT COLOR: Dark Blue Accent */
     background-color: var(--primary-blue); 
 }
 
@@ -177,7 +148,6 @@
 .card-icon {
     flex-shrink: 0;
     font-size: 2.5rem;
-    /* CONSISTENT COLOR: Dark Blue Accent */
     color: var(--primary-blue); 
     margin-right: 25px;
     padding-top: 5px;
@@ -203,7 +173,6 @@
 }
 
 .learn-more {
-    /* CONSISTENT COLOR: Dark Blue Accent */
     color: var(--primary-blue);
     text-decoration: none;
     font-size: 0.9rem;
@@ -212,14 +181,12 @@
 }
 
 .learn-more:hover {
-    /* CONSISTENT COLOR: Dark Blue Accent */
     color: var(--primary-blue);
 }
 
-/* --- Bottom CTA Banner --- */
+/* --- Bottom CTA Banner (Unchanged) --- */
 .cta-banner {
     margin-top: 60px;
-    /* CONSISTENT COLOR: Dark Blue Accent */
     background-color: var(--primary-blue); 
     border-radius: 8px;
     overflow: hidden;
@@ -264,7 +231,6 @@
 }
 
 .cta-button {
-    /* Background color based on dark theme */
     background-color: var(--background-dark); 
     color: var(--text-light);
     padding: 12px 30px;
@@ -287,7 +253,6 @@
     right: 20px;
     width: 40px;
     height: 40px;
-    /* COLOR KEPT: Teal Accent (like the Footer's floating button) */
     background-color: var(--primary-teal);
     color: var(--text-light);
     border-radius: 4px;
@@ -300,23 +265,28 @@
 }
 
 /* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    /* At 1200px and below, keep 3 columns */
+    .services-grid-6 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
 @media (max-width: 900px) {
-    .services-grid {
-        grid-template-columns: 1fr;
+    /* Below 900px, drop to 2 columns */
+    .services-grid-6 {
+        grid-template-columns: 1fr 1fr;
     }
     .cta-text {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
-    .card-1.is-visible, 
-    .card-2.is-visible, 
-    .card-3.is-visible, 
-    .card-4.is-visible {
-        animation-name: fadeInUp;
-    }
 }
 @media (max-width: 600px) {
+    /* Below 600px, drop to 1 column */
+    .services-grid, .services-grid-6 {
+        grid-template-columns: 1fr;
+    }
      .cta-content {
         flex-direction: column;
         text-align: center;

@@ -1,6 +1,6 @@
 // src/components/AboutBey.jsx
 import React from 'react';
-import Navbar from './Navbar'; 
+//import Navbar from './Navbar'; 
 import CoreValuesSection from './CoreValuesSection'; // <-- NEW IMPORT
 import './AboutBey.css';
 // Assuming you have an image named 'office_setup.jpg' in src/assets/
@@ -11,7 +11,6 @@ import BeyVideo from '../assets/bey.mp4';
 const AboutBey = () => {
     return (
         <div className="about-bey-page">
-            <Navbar /> 
             
             {/* Top Hero Section: "Who We Are" */}
             <header className="about-hero-section">
@@ -58,10 +57,9 @@ const AboutBey = () => {
                             <div className="text-block">
                                 <h3 className="story-heading">Our Story</h3>
                                 <p className="story-paragraph">
-                                    In 2012, MaglaTech was founded with a clear mission to transform software 
-                                    development and cybersecurity solutions in Africa and beyond. Since its 
-                                    inception, MaglaTech has grown from a startup incubator, to a high-growth 
-                                    technology company serving clients across the globe.
+                                    At Bey Technologies, we are passionate about helping businesses succeed by delivering cutting-edge 
+                                    IT solutions tailored to their unique needs. Based in Dar es Salaam, Tanzania,
+                                     we specialize in Odoo ERP implementation, IT consultancy, software development, digital marketing, and much more..
                                 </p>
                             </div>
                             

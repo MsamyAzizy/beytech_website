@@ -1,10 +1,10 @@
+/* src/components/ContactSection.css */
+
 /* ====================================================================== */
-/* 1. Contact Section Styles (ContactSection.css) */
+/* 1. Contact Section Styles */
 /* ====================================================================== */
 
 /* --- Animation Keyframes (Smoother Style) --- */
-
-
 @keyframes slideInLeft {
     from { opacity: 0; transform: translateX(-30px); }
     to { opacity: 1; transform: translateX(0); }
@@ -20,10 +20,10 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-
 html {
     scroll-behavior: smooth; 
 }
+
 /* --- Common Variables (Updated for Screenshot Look) --- */
 :root {
     --primary-color: #3b82f6; /* Bright Blue Accent (matches button) */
@@ -198,7 +198,6 @@ html {
 .contact-form-column {
     display: flex;
     flex-direction: column;
-    /* Map and Form removed, only form remains, taking full height */
 }
 
 /* Form Card */
@@ -295,7 +294,7 @@ html {
 .contact-info-card, .info-details, 
 .detail-item, .detail-icon, .detail-detail {
     /* These styles are obsolete or superseded by new classes */
-    display: none; 
+    /* Kept as comments or removed based on the latest input */
 }
 
 

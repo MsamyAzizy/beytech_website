@@ -11,18 +11,18 @@ const Footer = () => {
     const footerData = [
         {
             icon: <FaMapMarkerAlt />, // Actual Map Marker Icon
-            title: 'Address',
-            lines: ['A108 Adam Street', 'New York, NY 535022'],
+            title: 'P.O.BOX ',
+            lines: ['Head Quarters, Mwenge', 'Josam House Floor No 4 , Dar es Salaam Tanzania '],
         },
         {
             icon: <FaPhone />, // Actual Phone Icon
             title: 'Contact',
-            lines: ['Phone: +1 5589 55488 55', 'Email: info@example.com'],
+            lines: ['Phone: +255 747 990 668 /    +255 747 990 668', 'Email: info@beytech.co.tz'],
         },
         {
             icon: <FaClock />, // Actual Clock Icon
             title: 'Opening Hours',
-            lines: ['Mon-Sat: 11AM - 2:3PM', 'Sunday: Closed'],
+            lines: ['Mon-Sat: 08:00AM - 05:00PM', 'Sunday: Closed'],
         },
     ];
 
@@ -83,7 +83,7 @@ const Footer = () => {
                         © Copyright.beytechnologies. All Rights Reserved
                     </p>
                     <p className="designer-text">
-                        Designed by <a href="#" className="designer-link">https://www.beytech.co.tz</a>
+                        Designed by <a href="#" className="designer-link">www.beytech.co.tz</a>
                     </p>
                     {/* Scroll to Top Button (CSS styled to be fixed/floating) */}
                     <a href="#top" className="scroll-to-top-footer" aria-label="Scroll to top">↑</a>

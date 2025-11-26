@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './ContactSection.css';
 // *** NEW ICON IMPORTS ***
-import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaStar, FaUserFriends, FaHourglassHalf, FaArrowRight } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaStar, FaUserFriends, FaHourglassHalf, FaArrowRight } from 'react-icons/fa';
 import { IoIosMail } from "react-icons/io"; // Using IoIosMail for the small email icon
 
 // --- Custom Hook for Persistent On-Scroll Visibility (Unchanged) ---
@@ -42,19 +42,19 @@ const contactDetails = [
     {
         icon: <IoIosMail />, // Small envelope icon
         title: 'Email',
-        detail: 'info@beytech.com.lb',
-        subtitle: 'We reply within 4 hours',
+        detail: 'info@beytech.co.tz',
+        subtitle: 'We reply within 1 hours',
     },
     {
         icon: <FaPhone />, 
         title: 'Phone',
-        detail: '+961 (555) 123-4567', 
-        subtitle: 'Mon-Fri: 9AM-7PM EST',
+        detail: '+255 747 990 668 / +255 747 990 668 ', 
+        subtitle: 'Mon-Fri: 08:00AM - 05:00PM ',
     },
     {
         icon: <FaMapMarkerAlt />, 
         title: 'Office',
-        detail: 'Ground floor, 310 Mutran building, Bauchrieh, Lebanon',
+        detail: 'Head Quarters, Mwenge ,Josam House Floor No 4 , Dar es Salaam Tanzania ',
         subtitle: 'Visit us anytime',
     },
 ];
@@ -93,7 +93,9 @@ const ContactSection = () => {
                                 Ready to Transform Your Digital Presence?
                             </h2>
                             <p className="contact-intro-text">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                Bey Technologies is your trusted partner in delivering advanced IT solutions tailored to your business needs. 
+                                Whether you require Odoo ERP implementation, custom software development, 
+                                IT consultancy, or digital transformation services, we have the expertise to drive your success.
                             </p>
                         </div>
                         

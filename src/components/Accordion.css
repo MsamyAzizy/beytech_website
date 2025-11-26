@@ -1,0 +1,100 @@
+/* src/components/Accordion.css */
+
+/* Variables from your theme */
+:root {
+    --primary-color: #3b82f6; 
+    --background-dark: #0f172a; 
+    --card-background: #1e293b; 
+    --text-light: #ffffff;
+    --text-medium: #94a3b8; 
+    --text-muted: #64748b;
+}
+
+.accordion-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.accordion-item {
+    background-color: var(--card-background);
+    margin-bottom: 15px; /* Spacing between items */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 25px;
+    cursor: pointer;
+    background-color: #26334a; /* Slightly different background for header */
+    transition: background-color 0.3s ease;
+}
+
+.accordion-item:hover .accordion-header {
+    background-color: #2e3d54;
+}
+
+.accordion-number {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Prevent number from shrinking */
+    margin-right: 20px;
+}
+
+.accordion-title {
+    flex-grow: 1; /* Title takes up available space */
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0; /* Reset default margin */
+}
+
+.accordion-icon {
+    color: var(--text-medium);
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.accordion-content {
+    padding: 15px 25px 20px 80px; /* Adjusted padding to align with header text */
+    background-color: var(--card-background);
+    color: var(--text-medium);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    animation: fadeIn 0.3s ease-out; /* Simple fade-in animation for content */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .accordion-header {
+        padding: 15px 20px;
+    }
+    .accordion-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+        margin-right: 15px;
+    }
+    .accordion-title {
+        font-size: 1rem;
+    }
+    .accordion-content {
+        padding: 10px 20px 15px 65px;
+        font-size: 0.9rem;
+    }
+}

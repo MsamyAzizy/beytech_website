@@ -1,11 +1,13 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // *** NEW: Import Router components ***
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './components/Home';
-// *** NEW: Import the AboutBey component ***
 import AboutBey from './components/AboutBey'; 
-import Footer from './components/Footer'; // Assuming Footer is needed outside the Loader
+import OdooPage from './pages/OdooPage'; 
+import Footer from './components/Footer'; 
+// 💥 NEW: Import Navbar to be used globally
+import Navbar from './components/Navbar'; 
 
 import Loader from './components/Loader';
 import './index.css';
@@ -17,7 +19,7 @@ function App() {
     // Simulate a network request or content loading time
     const timer = setTimeout(() => {
       setIsLoading(false); 
-    }, 3500); 
+    }, 3000); 
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -31,6 +33,8 @@ function App() {
   return (
     <Router>
       
+      <Navbar /> {/* 💥 FIX: Navbar is placed here to appear on Home, About, and Odoo pages */}
+      
       <Routes>
         {/* Route for the homepage */}
         <Route path="/" element={<Home />} />
@@ -38,7 +42,10 @@ function App() {
         {/* Route for the new About page */}
         <Route path="/about" element={<AboutBey />} /> 
         
-        {/* You can add more routes here (e.g., path="/services") */}
+        {/* NEW ROUTE: Route for the Odoo ERP Implementation page */}
+        <Route path="/services/odoo-erp" element={<OdooPage />} />
+
+        {/* You can add more routes here (e.g., path="/contact", path="/team") */}
       </Routes>
       
       <Footer /> {/* Footer stays outside Routes to appear on all pages */}
