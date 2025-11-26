@@ -19,12 +19,26 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-.initial-hidden {
-    opacity: 0;
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
+.initial-hidden {
+    opacity: 0;
+    transform: translateY(20px); /* Default for initial-hidden */
+}
+
+/* Base visibility class for staggered elements */
 .is-visible-fade-up {
     animation: fadeInUp var(--animation-duration) ease-out forwards;
+    animation-fill-mode: forwards; 
+}
+
+/* For project cards, allowing individual stagger via inline style */
+.is-visible-fade-up-staggered {
+    animation: fadeInUp var(--animation-duration) ease-out forwards;
+    animation-fill-mode: forwards;
 }
 
 /* ========================================================= */
@@ -32,9 +46,10 @@
 /* ========================================================= */
 
 .portfolio-section {
-    background-color: var(--background-dark);
+    background-color: #0f172a;
     padding: 100px 0;
     color: var(--text-light);
+    overflow: hidden; 
 }
 
 .portfolio-container {
@@ -43,11 +58,14 @@
     padding: 0 40px;
 }
 
-/* --- NEW HEADER STYLES --- */
+/* --- HEADER STYLES --- */
 .portfolio-header {
     text-align: center;
     max-width: 700px;
-    margin: 0 auto 60px auto; /* Add margin below header */
+    margin: 0 auto 60px auto; 
+    opacity: 0;
+    transform: translateY(20px);
+    animation-delay: 0.1s; 
 }
 
 .portfolio-title {
@@ -61,7 +79,14 @@
     border: none;
     border-top: 3px solid var(--primary-color);
     width: 60px;
-    margin: 0 auto 20px auto; /* Center the underline */
+    margin: 0 auto 20px auto; 
+    transform: scaleX(0); 
+    transition: transform 0.5s ease var(--animation-duration); 
+    transform-origin: center;
+}
+
+.portfolio-header.is-visible-fade-up .header-underline {
+    transform: scaleX(1); 
 }
 
 .portfolio-description {
@@ -70,7 +95,6 @@
     line-height: 1.6;
     margin-bottom: 0;
 }
-/* --- END HEADER STYLES --- */
 
 
 /* ========================================================= */
@@ -79,10 +103,13 @@
 
 .category-filters {
     display: flex;
-    justify-content: center; /* Center filters below the header */
+    justify-content: center; 
     flex-wrap: wrap; 
     gap: 15px;
     margin-bottom: 60px;
+    opacity: 0; 
+    transform: translateY(20px);
+    animation-delay: calc(var(--animation-duration) + 0.2s); 
 }
 
 .filter-button {
@@ -94,27 +121,55 @@
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(.25, .46, .45, .94); 
+    position: relative; 
+    z-index: 1;
+    overflow: hidden;
+}
+
+.filter-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: translateX(-101%);
+    transition: transform 0.3s cubic-bezier(.25, .46, .45, .94);
+    z-index: -1;
+}
+
+.filter-button:hover:not(.active)::before {
+    transform: translateX(0);
 }
 
 .filter-button:hover:not(.active) {
+    color: var(--text-light); 
     border-color: var(--primary-color);
-    color: var(--primary-color);
 }
 
 .filter-button.active {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     color: var(--text-light);
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(var(--primary-color-rgb, 59, 130, 246), 0.3);
 }
 
 .filter-button:disabled {
-    opacity: 0.6;
+    opacity: 0.4; 
     cursor: not-allowed;
+    background-color: var(--card-background); 
+    border-color: var(--text-muted);
+    color: var(--text-muted);
+}
+.filter-button:disabled::before {
+    transform: translateX(-101%); 
 }
 
 /* ========================================================= */
-/* 3. Projects Grid & Ultra-Unique Animations */
+/* 3. Projects Grid & Ultra-Unique Animations (Refined Disappear/Reappear) */
 /* ========================================================= */
 
 .projects-grid {
@@ -124,29 +179,51 @@
     perspective: 1500px;
 }
 
-/* Animation for cards exiting (cross-cut out - Slicing away) */
-@keyframes crossCutOut {
+/* Animation for cards exiting (disappearing effect) */
+@keyframes projectDisappear {
     0% {
         opacity: 1;
-        transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1) skewX(0deg);
+        transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    50% { /* Mid-point for a dynamic "pop" */
+        opacity: 0.5;
+        transform: translate3d(var(--random-x, 0px), var(--random-y, 0px), 100px) 
+                   rotateX(var(--random-rotX, 0deg)) rotateY(var(--random-rotY, 0deg)) 
+                   scale(var(--random-scale, 1));
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Lighter shadow in mid-air */
     }
     100% {
         opacity: 0;
-        /* Unique Effect: Slides up-left, flips dramatically, shrinks significantly, and skews */
-        transform: translate3d(-150px, -50px, 200px) rotateX(45deg) rotateY(-45deg) scale(0.5) skewX(10deg); 
+        /* Explode outwards and shrink significantly into the distance */
+        transform: translate3d(var(--explode-x, 200px), var(--explode-y, -100px), 800px) 
+                   rotateX(var(--explode-rotX, 70deg)) rotateY(var(--explode-rotY, -70deg)) 
+                   scale(0.1); /* Shrink almost to nothing */
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0); 
     }
 }
 
-/* Animation for cards entering (cross-cut in - Slicing into view) */
-@keyframes crossCutIn {
+/* Animation for cards entering (reappearing effect) */
+@keyframes projectReappear {
     0% {
         opacity: 0;
-        /* Unique Effect: Starts far away, rotated opposite, and skewed */
-        transform: translate3d(150px, 50px, -200px) rotateX(-45deg) rotateY(45deg) scale(0.5) skewX(-10deg); 
+        /* Start from a random distant point, scaled down and rotated */
+        transform: translate3d(var(--entry-x, -200px), var(--entry-y, 100px), -800px) 
+                   rotateX(var(--entry-rotX, -70deg)) rotateY(var(--entry-rotY, 70deg)) 
+                   scale(0.1);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    50% { /* Mid-point for a dynamic "bounce" */
+        opacity: 0.5;
+        transform: translate3d(var(--random-x, 0px), var(--random-y, 0px), -100px) 
+                   rotateX(var(--random-rotX, 0deg)) rotateY(var(--random-rotY, 0deg)) 
+                   scale(var(--random-scale, 1));
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     100% {
         opacity: 1;
-        transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1) skewX(0deg);
+        transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -161,18 +238,39 @@
     opacity: 0; 
     transform-style: preserve-3d;
     transform: translate3d(0, 0, 0); 
-    
     animation-fill-mode: forwards; 
-    transition: transform var(--filter-animation-duration) ease-out; 
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
+
+    /* Add custom properties for animation randomness - values will be set by JS */
+    --explode-x: 0px;
+    --explode-y: 0px;
+    --explode-rotX: 0deg;
+    --explode-rotY: 0deg;
+
+    --entry-x: 0px;
+    --entry-y: 0px;
+    --entry-rotX: 0deg;
+    --entry-rotY: 0deg;
+
+    --random-x: 0px;
+    --random-y: 0px;
+    --random-rotX: 0deg;
+    --random-rotY: 0deg;
+    --random-scale: 1;
 }
 
-/* Applying the cross-cut animations */
-.project-card.animate-out-crosscut {
-    animation: crossCutOut var(--filter-animation-duration) ease-in forwards;
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02); 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35); 
 }
 
-.project-card.animate-in-crosscut {
-    animation: crossCutIn var(--filter-animation-duration) ease-out forwards;
+/* Applying the new disappear/reappear animations */
+.project-card.animate-out-crosscut { 
+    animation: projectDisappear var(--filter-animation-duration) ease-in forwards;
+}
+
+.project-card.animate-in-crosscut { 
+    animation: projectReappear var(--filter-animation-duration) ease-out forwards;
 }
 
 
@@ -181,7 +279,7 @@
 .project-image-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 70%; 
+    padding-bottom: 60%; /* Reduced from 70% to 60% for shorter image height */
     overflow: hidden;
 }
 
@@ -193,32 +291,33 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s cubic-bezier(.25, .46, .45, .94); 
 }
 
 .project-card:hover .project-image {
-    transform: scale(1.05);
+    transform: scale(1.1); 
 }
 
 .corner-tag {
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: rgba(255, 255, 255, 0.15); 
+    background-color: rgba(255, 255, 255, 0.25); 
     color: var(--text-light);
-    padding: 5px 12px;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    padding: 6px 14px; 
+    border-radius: 6px; 
+    font-size: 0.8rem; 
     font-weight: 600;
     text-transform: uppercase;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
     z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
 }
 
 
 .project-info {
-    padding: 25px;
+    padding: 20px; /* Reduced from 25px to 20px */
     flex-grow: 1; 
     display: flex;
     flex-direction: column;
@@ -234,7 +333,7 @@
 }
 
 .project-category {
-    font-weight: 500;
+    font-weight: 600; 
     color: var(--primary-color); 
 }
 
@@ -243,17 +342,17 @@
 }
 
 .project-title {
-    font-size: 1.3rem;
+    font-size: 1.3rem; /* Reduced from 1.4rem */
     font-weight: 700;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0; /* Reduced margin-bottom */
     color: var(--text-light);
 }
 
 .project-description {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Reduced from 0.95rem */
     color: var(--text-medium);
-    line-height: 1.6;
-    margin-bottom: 20px;
+    line-height: 1.5; /* Slightly tighter line height */
+    margin-bottom: 15px; /* Reduced margin-bottom */
     flex-grow: 1; 
 }
 
@@ -261,42 +360,49 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px; /* Reduced margin-bottom */
 }
 
 .project-tag {
-    background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.15); 
+    background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.25); 
     color: var(--primary-color);
-    padding: 5px 12px;
-    border-radius: 4px;
+    padding: 5px 10px; /* Reduced padding */
+    border-radius: 5px;
     font-size: 0.75rem;
     font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
+.project-tag:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    transform: translateY(-2px); 
+}
 
 .case-study-link {
     display: inline-flex;
     align-items: center;
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Slightly reduced from 1rem */
     font-weight: 600;
     margin-top: auto; 
-    transition: color 0.3s;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .case-study-link:hover {
     color: #a7d9f9; 
+    transform: translateX(5px); 
 }
 
 .case-study-link svg {
-    margin-left: 8px;
-    transition: transform 0.3s;
+    margin-left: 10px; 
+    transition: transform 0.3s ease;
 }
 
 .case-study-link:hover svg {
-    transform: translateX(5px);
+    transform: translateX(8px); 
 }
 
 /* ========================================================= */
@@ -306,6 +412,12 @@
 @media (max-width: 1024px) {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr); 
+    }
+    .portfolio-title {
+        font-size: 2.2rem;
+    }
+    .project-image-wrapper {
+        padding-bottom: 65%; /* Adjust image ratio slightly for two columns */
     }
 }
 
@@ -318,24 +430,44 @@
     }
     .category-filters {
         justify-content: center; 
+        gap: 10px;
     }
     .portfolio-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    .portfolio-description {
+        font-size: 0.9rem;
+    }
+    .filter-button {
+        padding: 9px 22px;
+        font-size: 0.85rem;
+    }
+    .project-card:hover {
+        transform: translateY(-5px) scale(1.01); 
+    }
+    .project-image-wrapper {
+        padding-bottom: 55%; /* More landscape for single column view */
     }
 }
 
 @media (max-width: 480px) {
     .filter-button {
-        padding: 8px 20px;
-        font-size: 0.85rem;
+        padding: 8px 18px;
+        font-size: 0.8rem;
     }
     .project-title {
         font-size: 1.1rem;
     }
     .project-description {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     .project-info {
-        padding: 15px;
+        padding: 12px;
+    }
+    .portfolio-header {
+        margin-bottom: 40px;
+    }
+    .category-filters {
+        margin-bottom: 40px;
     }
 }

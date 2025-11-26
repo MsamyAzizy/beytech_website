@@ -1,125 +1,91 @@
 // src/components/TeamSection.jsx
-import React, { useState, useRef } from 'react';
+import React from 'react'; // Removed useState, useRef
 import './TeamSection.css';
-import { FaChevronLeft, FaChevronRight, FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa'; 
+import { FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa'; // Only keeping relevant icons
 
 // Placeholder imports for team member images (Using generic placeholder)
+// NOTE: These images should be circular or easily crop to circles.
 import B_placeholderImg from '../assets/B.png'; 
 
 
-// Placeholder data structure for 10 members
+// Placeholder data structure for the 4 members visible in the image
 const teamMembers = [
-    { name: 'BEY STAFF NAME', role: 'Project Manager', imgSrc: B_placeholderImg, description: 'XXXXXXXXXXX', twitter: '#', facebook: '#', instagram: '#', linkedin: '#' },
-    { name: 'BEY STAFF NAME', role: 'Chief Technology Officer', imgSrc: B_placeholderImg, description: 'XXXXXXXXXXX', twitter: '#', facebook: '#', instagram: '#', linkedin: '#' },
-    { name: 'BEY STAFF NAME', role: 'Product Designer', imgSrc: B_placeholderImg, description: 'XXXXXXXXXXX', twitter: '#', facebook: '#', instagram: '#', linkedin: '#' },
-    { name: 'BEY STAFF NAME', role: 'Marketing Specialist', imgSrc: B_placeholderImg, description: 'XXXXXXXXXXX', twitter: '#', facebook: '#', instagram: '#', linkedin: '#' },
-    { name: 'BEY STAFF NAME', role: 'Software Engineer', imgSrc: B_placeholderImg, description: 'XXXXXXXXXXX.', twitter: '#', facebook: '#', instagram: '#', linkedin: '#' },
-   
+    { 
+        name: 'BOSS', 
+        role: 'Chief Executive Officer', 
+        imgSrc: B_placeholderImg, 
+        description: 'Drives the company\'s overall vision, strategy, and growth, ensuring alignment with long-term objectives and fostering a culture of innovation and excellence.', 
+        twitter: '#', facebook: '#', instagram: '#' 
+    },
+    { 
+        name: 'BENJAMIN DEUS', 
+        role: 'Technical Director', 
+        imgSrc: B_placeholderImg, 
+        description: 'Oversees all technical strategy and execution, ensuring our software architecture is scalable, secure, and utilizes the best modern technologies for superior client solutions.', 
+        twitter: '#', facebook: '#', instagram: '#' 
+    },
+    { 
+        name: 'Cessilia Nkuba', 
+        role: 'Chief Operating Officer', 
+        imgSrc: B_placeholderImg, 
+        description: 'Manages the day-to-day operational efficiency and organizational structure. Responsible for optimizing workflows, client success, and translating.', 
+        twitter: '#', facebook: '#', instagram: '#' 
+    },
+    { 
+        name: 'Ramadhani Selemani', 
+        role: 'Human Resource Manager', 
+        imgSrc: B_placeholderImg, 
+        description: 'Leads talent acquisition, retention, and development initiatives. Focuses on fostering an inclusive, high-performance work environment that supports employee growth and well-being.', 
+        twitter: '#', facebook: '#', instagram: '#' 
+    },
+    // You can add more members here; the grid will wrap them
 ];
 
-// Configuration
-const CARDS_VISIBLE = 4; // Number of cards visible at one time
-const TOTAL_CARDS = teamMembers.length;
 
 const TeamSection = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const carouselRef = useRef(null);
-
-    // Determines the last possible starting index (10 total - 4 visible = 6)
-    const maxIndex = TOTAL_CARDS - CARDS_VISIBLE; 
-
-    const handlePrev = () => {
-        setCurrentIndex(prevIndex => Math.max(0, prevIndex - CARDS_VISIBLE));
-    };
-
-    const handleNext = () => {
-        // Stops the slide when the last card is visible
-        setCurrentIndex(prevIndex => Math.min(maxIndex, prevIndex + CARDS_VISIBLE));
-    };
-    
-    // Disable logic based on non-wrapping carousel
-    const isPrevDisabled = currentIndex === 0;
-    const isNextDisabled = currentIndex >= maxIndex; 
-    
-    // Calculate the translation shift percentage for 4 cards to move
-    const translateValue = (currentIndex / CARDS_VISIBLE) * 100;
-    
-    // Calculate the total width of the grid based on the number of cards
-    const gridWidth = (TOTAL_CARDS / CARDS_VISIBLE) * 100;
-
-
+    // The component is now a static grid container, no complex state needed.
     return (
         <section className="team-section">
             <div className="team-content-wrapper">
                 
-                {/* Header and Arrows Wrapper */}
-                <div className="team-header-and-nav">
-                    {/* Centered Section Header */}
-                    <div className="team-header-new">
-                        <h2 className="team-title-new">Our Professional Team</h2>
-                        <hr className="header-underline" />
-                        <p className="team-description-new">
-                            We have achieved remarkable success in a short time, 
-                            fostering a purpose-driven and inspired culture where teams 
-                            collaborate seamlessly toward shared goals.
+                {/* Header: Centered, Orange Title */}
+                <header className="team-header-static">
+                    <h2 className="team-title-static">Meet Our Team</h2>
+                </header>
+                
 
-                        </p>
-                    </div>
-                    
-                    {/* Navigation Arrows for the carousel */}
-                    <div className="team-nav-arrows-new">
-                        <span 
-                            className={`arrow-new left-arrow-new ${isPrevDisabled ? 'disabled' : ''}`}
-                            onClick={handlePrev}
-                        >
-                            <FaChevronLeft />
-                        </span>
-                        <span 
-                            className={`arrow-new right-arrow-new ${isNextDisabled ? 'disabled' : ''}`}
-                            onClick={handleNext}
-                        >
-                            <FaChevronRight />
-                        </span>
-                    </div>
-                </div>
+                {/* Team Member Grid Container: Simple Flex/Grid layout */}
+                <div className="team-members-grid-static">
+                    {teamMembers.map((member, index) => (
+                        <div className="member-card-static" key={index}>
+                            
+                            {/* Image Container with Orange Ring */}
+                            <div className="member-image-container-static">
+                                <img 
+                                    src={member.imgSrc} 
+                                    alt={member.name} 
+                                    className="member-image-static" 
+                                />
+                            </div>
+                            
+                            <div className="member-details-static">
+                                <h3 className="member-name-static">{member.name}</h3>
+                                
+                                {/* Description sits between name and role in the image */}
+                                <p className="member-description-static">{member.description}</p>
+                                
+                                <p className="member-role-static">{member.role}</p>
 
-                {/* Team Member Carousel Container */}
-                <div className="team-carousel-wrapper">
-                    <div 
-                        ref={carouselRef} 
-                        className="team-members-grid-new"
-                        // Apply CSS translation based on the calculated percentage
-                        style={{ 
-                            transform: `translateX(-${translateValue}%)`,
-                            width: `${gridWidth}%` 
-                        }}
-                    >
-                        {teamMembers.map((member, index) => (
-                            <div className="member-card-new" key={index}>
-                                <div className="member-image-container-new">
-                                    <img 
-                                        src={member.imgSrc} 
-                                        alt={member.name} 
-                                        className="member-image-new" 
-                                    />
-                                    {/* --- SOCIAL MEDIA OVERLAY --- */}
-                                    <div className="social-media-overlay-new">
-                                        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="social-icon-new twitter-icon"><FaTwitter /></a>
-                                        <a href={member.facebook} target="_blank" rel="noopener noreferrer" className="social-icon-new facebook-icon"><FaFacebookF /></a>
-                                        <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="social-icon-new instagram-icon"><FaInstagram /></a>
-                                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon-new linkedin-icon"><FaLinkedinIn /></a>
-                                    </div>
-                                    {/* --------------------------- */}
-                                </div>
-                                <div className="member-details-new">
-                                    <h3 className="member-name-new">{member.name}</h3>
-                                    <p className="member-role-new">{member.role}</p>
-                                    <p className="member-description-new">{member.description}</p>
+                                {/* Social Media Icons at the bottom */}
+                                <div className="social-media-icons-static">
+                                    <a href={member.facebook} target="_blank" rel="noopener noreferrer" className="social-icon-static"><FaFacebookF /></a>
+                                    <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="social-icon-static"><FaTwitter /></a>
+                                    <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="social-icon-static"><FaInstagram /></a>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div> {/* End of team-carousel-wrapper */}
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );

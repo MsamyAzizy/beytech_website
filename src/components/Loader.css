@@ -1,49 +1,70 @@
 /* src/components/Loader.css */
 
+/* --- Variables --- */
+:root {
+    --primary-color: #3b82f6; 
+    --loader-background: #ffffff;
+    --logo-max-width: 180px; 
+    --rotation-duration: 1.5s; 
+    --pop-duration: 0.4s;     
+    --total-animation-time: 1.9s; 
+}
+
 .loader-overlay {
-  position: fixed; /* Fixed to cover the entire viewport */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #ffffff; /* White background as in the image */
+  background-color: var(--loader-background); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Ensure it's on top of everything */
+  z-index: 9999; 
+  /* Ensures the overlay fades out smoothly as content loads */
+  animation: fade-out-overlay var(--pop-duration) forwards var(--total-animation-time); 
 }
 
-.loader-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  grid-template-rows: repeat(3, 1fr); /* 3 rows */
-  gap: 6px; /* Space between squares */
-  width: 60px; /* Overall width of the grid */
-  height: 60px; /* Overall height of the grid */
+/* --- Styling for the Centered Loading Logo --- */
+.loading-logo {
+    max-width: var(--logo-max-width); 
+    height: auto; 
+    display: block; 
+    
+    /* Combine rotation and the pop effect */
+    animation: 
+        spin-fast var(--rotation-duration) ease-out forwards, 
+        logo-pop var(--pop-duration) ease-in forwards var(--rotation-duration); 
 }
 
-.loader-square {
-  width: 18px; /* Size of each square */
-  height: 18px;
-  background-color: #1a202c; /* Dark blue/black color from your logo */
-  opacity: 0; /* Start invisible */
-  animation: square-fade 1.2s infinite ease-in-out; /* Main animation */
+/* --- Keyframe Animation: Fast Spin --- */
+@keyframes spin-fast {
+    0% { transform: rotateY(0deg); opacity: 1; }
+    100% { transform: rotateY(720deg); opacity: 1; } 
 }
 
-/* Delay for each square to create a wave effect */
-.loader-square:nth-child(1) { animation-delay: 0.1s; }
-.loader-square:nth-child(2) { animation-delay: 0.2s; }
-.loader-square:nth-child(3) { animation-delay: 0.3s; }
-.loader-square:nth-child(4) { animation-delay: 0.4s; }
-.loader-square:nth-child(5) { animation-delay: 0.5s; }
-.loader-square:nth-child(6) { animation-delay: 0.6s; }
-.loader-square:nth-child(7) { animation-delay: 0.7s; }
-.loader-square:nth-child(8) { animation-delay: 0.8s; }
-.loader-square:nth-child(9) { animation-delay: 0.9s; }
+/* --- Keyframe Animation: The "POP / BOOM" and FLY effect --- */
+@keyframes logo-pop {
+    0% { 
+        /* Starting from the center (scale 1 after rotation) */
+        transform: scale(1) translate(0, 0); 
+        opacity: 1; 
+        filter: brightness(100%);
+    }
+    100% { 
+        /* 💥 New Final State: Fly to Top-Left */
+        /* Move the logo dramatically up (e.g., -50vh) and left (e.g., -50vw) 
+           to push it toward the top-left corner of the screen, 
+           while simultaneously scaling up for the 'boom' and fading out. */
+        transform: scale(1.5) translate(calc(var(--logo-max-width) * -2), calc(var(--logo-max-width) * -2)); 
+        opacity: 0; 
+        filter: brightness(150%); 
+        visibility: hidden; 
+    }
+}
 
-
-/* Keyframe animation for the fade effect */
-@keyframes square-fade {
-  0%, 100% { opacity: 0; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1); }
+/* --- Keyframe Animation: Fade out the entire overlay --- */
+@keyframes fade-out-overlay {
+    0% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
 }

@@ -1,0 +1,369 @@
+/* src/pages/DigitalMarketing.css */
+
+/* Reusing and adding new variables */
+:root {
+    --primary-color-blue: #3b82f6; 
+    --text-light: #ffffff;
+    --text-medium: #94a3b8; 
+    --text-dark: #000000;
+    --spacing-xl: 100px;
+    --spacing-lg: 60px;
+    --spacing-md: 30px;
+    --hero-bg-dark: #121212; 
+    --hero-pretitle-color: #00BA5E; 
+    --hero-button-bg: #004aba; 
+    --hero-button-hover: #003a98; 
+    --bottom-section-bg: #F4F7FB; 
+    --bottom-card-text-dark: #333333; 
+}
+
+/* Base page container */
+.marketing-page-container {
+    background-color: var(--bottom-section-bg); 
+    color: var(--text-light); 
+    min-height: 100vh;
+}
+
+/* ========================================================= */
+/* 1. ANIMATION KEYFRAMES */
+/* ========================================================= */
+
+/* Slide-up for text elements and cards */
+@keyframes slideUpIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Zoom-in for the main illustration */
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Fade-in for abstract shapes */
+@keyframes fadeInShape {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 💥 NEW KEYFRAME: Animated gradient movement */
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* ========================================================= */
+/* 2. Hero Section Styling */
+/* ========================================================= */
+.marketing-hero-section {
+    background-color: var(--hero-bg-dark);
+    position: relative;
+    padding: var(--spacing-lg) 0;
+    overflow: hidden; 
+    min-height: 600px; 
+    display: flex;
+    align-items: center; 
+}
+
+.hero-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    padding: 0 40px;
+    position: relative; 
+    z-index: 10; 
+}
+
+.hero-text-block {
+    flex: 1.2; 
+    max-width: 600px;
+    text-align: left;
+}
+
+/* --- Hero Animation Hooks --- */
+.hero-text-block .animate-in-slideup {
+    opacity: 0;
+    animation: slideUpIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.hero-illustration.animate-in-zoom {
+    opacity: 0;
+    animation: zoomIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.3s;
+}
+
+.abstract-shape-1.animate-in-shape, 
+.abstract-shape-2.animate-in-shape, 
+.abstract-shape-3.animate-in-shape, 
+.abstract-shape-4.animate-in-shape {
+    opacity: 0;
+    animation: fadeInShape 0.5s ease-out forwards;
+}
+/* -------------------------- */
+
+
+.hero-pre-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--hero-pretitle-color);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-main-title {
+    font-size: 3.2rem; 
+    font-weight: 900; 
+    color: var(--text-light);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+/* 💥 NEW STYLING: Animated Text Background */
+.animated-text-background {
+    /* Create a wide gradient background */
+    background: linear-gradient(
+        90deg, 
+        #3B4FEA, /* Blue */
+        #00BA5E, /* Green */
+        #F63C6D, /* Red */
+        #3B4FEA  /* Repeat Blue for loop */
+    );
+    background-size: 400% 100%; /* Make the gradient 4x wider than the text */
+    
+    /* Clip the background to the text shape */
+    -webkit-background-clip: text; 
+    background-clip: text;
+    
+    /* Make the text transparent so the background shows through */
+    color: transparent; 
+    -webkit-text-fill-color: transparent;
+    
+    /* Apply the animation */
+    animation: moveGradient 10s ease infinite alternate; /* Moves back and forth */
+}
+/* -------------------------------------- */
+
+
+.hero-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-cta-button {
+    background-color: var(--hero-button-bg);
+    color: var(--text-light);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-cta-button:hover {
+    background-color: var(--hero-button-hover);
+}
+
+.hero-image-block {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-illustration {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Abstract Shapes --- */
+.abstract-shape-1 {
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    top: 15%;
+    left: 10%;
+    border-radius: 5px;
+    transform: rotate(-10deg);
+}
+
+.abstract-shape-2 {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    bottom: 20%;
+    left: 5%;
+}
+
+.abstract-shape-3 {
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    top: 50%;
+    right: 5%;
+    border-radius: 5px;
+    transform: rotate(20deg);
+}
+.abstract-shape-4 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    bottom: 10%;
+    right: 20%;
+    border-radius: 50%;
+}
+
+
+/* ========================================================= */
+/* 3. Service Cards Section Styling */
+/* ========================================================= */
+.marketing-cards-section {
+    padding: var(--spacing-lg) 40px var(--spacing-xl) 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--bottom-section-bg); 
+}
+
+.service-cards-grid-image-style {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: var(--spacing-md);
+    margin-top: -80px; 
+    position: relative;
+    z-index: 15; 
+}
+
+/* Card Animation */
+.service-card-image-style.card-animate-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+}
+
+
+.service-card-image-style {
+    color: var(--text-light); 
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* 💥 NEW GRADIENT BACKGROUND */
+    /* Use the custom property passed from JSX to create a diagonal gradient */
+    background: linear-gradient(
+        135deg, 
+        var(--card-base-color), 
+        color-mix(in srgb, var(--card-base-color) 80%, black) /* Mix the base color with black to get a darker shade */
+    );
+}
+
+.service-card-image-style:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon-image-style {
+    font-size: 2.5rem; 
+    margin-bottom: 15px;
+    color: var(--text-light); 
+}
+
+.service-card-image-style h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: var(--text-light);
+}
+
+.card-description-image-style {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85); 
+    margin: 0;
+    max-width: 250px; 
+}
+
+
+/* ========================================================= */
+/* 4. Responsive Adjustments */
+/* ========================================================= */
+@media (max-width: 992px) {
+    .hero-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spacing-md) 20px;
+    }
+    .hero-text-block {
+        max-width: 100%;
+        margin-bottom: var(--spacing-md);
+    }
+    .hero-main-title {
+        font-size: 2.8rem;
+    }
+    .marketing-hero-section {
+        min-height: auto;
+        padding: var(--spacing-lg) 0;
+    }
+    .marketing-cards-section {
+        padding-top: var(--spacing-md); 
+        margin-top: -60px;
+    }
+    .abstract-shape-1, .abstract-shape-2, .abstract-shape-3, .abstract-shape-4 {
+        display: none; 
+    }
+}
+
+@media (max-width: 768px) {
+    .marketing-main-title {
+        font-size: 2.2rem;
+    }
+    .hero-pre-title {
+        font-size: 0.9rem;
+    }
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    .service-cards-grid-image-style {
+        grid-template-columns: repeat(2, 1fr); 
+        margin-top: -40px;
+    }
+    .marketing-cards-section {
+        padding: var(--spacing-md) 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-main-title {
+        font-size: 1.8rem;
+    }
+    .hero-cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .service-cards-grid-image-style {
+        grid-template-columns: 1fr; 
+    }
+    /* Ensure animation works on mobile */
+    .animated-text-background {
+        background-size: 200% 100%; /* Adjust size for narrower screens */
+        animation: moveGradient 7s ease infinite alternate;
+    }
+}

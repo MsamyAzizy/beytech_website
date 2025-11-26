@@ -135,7 +135,7 @@
 }
 
 /* ====================================================================== */
-/* 2. Dropdown Menu (Desktop Only) */
+/* 2. Dropdown Menu (Desktop Only) - MODERNIZED STYLES */
 /* ====================================================================== */
 
 /* Container for SERVICES link */
@@ -176,14 +176,20 @@
     position: absolute;
     top: 100%; 
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    width: 220px;
-    background-color: #1a202c; 
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
+    /* Start slightly below and off-center for transition */
+    transform: translateX(-50%) translateY(10px); 
+    width: 250px; /* Increased width for better readability */
+    
+    /* 💥 MODERNIZED LOOK */
+    background-color: rgba(18, 18, 18, 0.95); /* Very dark, slightly transparent background */
+    backdrop-filter: blur(10px); /* Add blur for a slick effect */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
+    border-radius: 8px; /* Softer, rounded corners */
+    box-shadow: 0px 15px 30px rgba(0,0,0,0.5); /* Deeper shadow */
+    
     list-style: none;
-    padding: 10px 0;
+    padding: 15px 0; /* More vertical padding */
     margin: 0;
-    border-radius: 4px;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -197,7 +203,7 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0); /* Final position: centered and flush */
 }
 
 .dropdown-menu li {
@@ -209,17 +215,18 @@
     display: block;
     padding: 10px 20px;
     text-align: left;
-    color: #ffffff;
+    color: #f0f0f0; /* Lighter text color */
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 1rem; /* Slightly larger font */
     font-weight: 500;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .dropdown-link:hover {
-    /* Using the Secondary Cyan for dropdown item hover */
-    background-color: rgba(0, 188, 212, 0.1); 
+    /* 💥 MODERNIZED HOVER */
+    background-color: rgba(var(--secondary-cyan), 0.1); /* Use slightly transparent cyan background */
     color: var(--secondary-cyan);
+    padding-left: 25px; /* Slight movement on hover */
 }
 
 /* Hide mobile dropdown items on desktop */

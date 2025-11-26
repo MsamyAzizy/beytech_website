@@ -1,26 +1,26 @@
 /* src/components/TeamSection.css */
 
-/* --- Variables (Consistent Theme) --- */
+/* --- Variables (Matching the Image) --- */
 :root {
-    --primary-color: #3b82f6; 
-    --background-dark: #0f172a; 
-    --card-background: #1e293b; 
-    --text-light: #ffffff;
-    --text-medium: #94a3b8; 
-    --text-muted: #64748b;
+    --primary-text-color: #bdbdbd; /* Dark text */
+    --accent-color-orange: #adadad; /* Bright Orange/Peach for title and rings */
+    --background-section: #0f172a; /* Light gray background */
+    --card-background: #ffffff; /* White card */
+    --shadow-color: rgba(0, 0, 0, 0.1);
     --gap-size: 30px; 
-    --carousel-transition: transform 0.5s ease-in-out;
+    --image-size: 130px; 
 }
 
 /* ========================================================= */
-/* 1. Section Structure and Header */
+/* 1. Section Structure and Header (Light Theme) */
 /* ========================================================= */
 
 .team-section {
-    background-color: var(--background-dark); 
-    color: var(--text-light);
-    padding: 100px 0;
-    overflow: hidden; /* Important for containing the carousel slide */
+    /* Subtle background color from the image */
+    background-color: var(--background-section); 
+    color: var(--primary-text-color);
+    padding: 80px 0;
+    overflow: hidden; 
 }
 
 .team-content-wrapper {
@@ -29,228 +29,150 @@
     padding: 0 40px;
 }
 
-.team-header-and-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end; 
-    margin-bottom: 30px;
+.team-header-static {
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-.team-header-new {
-    max-width: 80%; 
-    text-align: left;
-}
-
-.team-title-new {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--text-light);
-}
-
-.header-underline {
-    border: none;
-    border-top: 3px solid var(--primary-color);
-    width: 60px;
-    margin-left: 0;
-    margin-bottom: 20px;
-}
-
-.team-description-new {
-    font-size: 1rem;
-    color: var(--text-medium);
-    line-height: 1.6;
-    margin-bottom: 0;
-}
-
-/* Navigation Arrows */
-.team-nav-arrows-new {
-    display: flex;
-    gap: 15px;
-    flex-shrink: 0; 
-    padding-bottom: 10px; 
-}
-
-.arrow-new {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--text-medium);
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-medium);
-    transition: all 0.3s ease;
-}
-
-.arrow-new:hover:not(.disabled) {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-}
-
-.arrow-new.disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    pointer-events: none;
+.team-title-static {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 0;
+    /* Title color matching the orange accent */
+    color: var(--accent-color-orange); 
 }
 
 /* ========================================================= */
-/* 2. Team Member Carousel Structure */
+/* 2. Team Member Grid (Static 4-Column) */
 /* ========================================================= */
 
-.team-carousel-wrapper {
-    overflow: hidden;
-    width: 100%; 
-}
-
-.team-members-grid-new {
-    display: flex; 
+.team-members-grid-static {
+    display: grid;
+    /* Use grid for a clean, static, auto-flowing 4-column layout */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     gap: var(--gap-size);
-    transition: var(--carousel-transition); 
 }
 
-/* Card Sizing: RESTORED TO PRECISE 4-COLUMN LAYOUT */
-.member-card-new {
-    flex-shrink: 0; 
-    /* Formula: 100% minus total gap space (3 * 30px = 90px), divided by 4 cards. */
-    width: calc( (105% - (var(--gap-size) * 3)) / 4 ); 
-    
+.member-card-static {
     background-color: var(--card-background);
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: left;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    /* Very subtle shadow for lift */
+    box-shadow: 0 5px 15px var(--shadow-color); 
+    text-align: center;
+    padding: 30px 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- Card Inner Styles --- */
-.member-image-container-new {
-    width: 100%;
-    /* Set height based on image aspect ratio in your reference image */
-    height: 350px; 
-    position: relative; /* Crucial for positioning the social overlay */
-    overflow: hidden;
+.member-card-static:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.member-image-new {
+/* --- Image Container (Circle Image with Orange Border) --- */
+.member-image-container-static {
+    width: var(--image-size);
+    height: var(--image-size);
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    /* Orange ring/border around the circle */
+    border: 3px solid var(--accent-color-orange); 
+    overflow: hidden;
+    position: relative;
+    /* Ensures image covers the circle cleanly */
+    background-color: #eee; 
+}
+
+.member-image-static {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: all 0.4s ease;
+    border-radius: 50%;
 }
 
 /* ========================================================= */
-/* 3. Social Media Hover Effect (NEW) */
+/* 3. Member Details */
 /* ========================================================= */
 
-.social-media-overlay-new {
-    position: absolute;
-    bottom: 20px; 
-    left: 50%;
-    transform: translateX(-50%);
+.member-details-static {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.member-name-static {
+    font-size: 1.3rem; 
+    font-weight: 700;
+    color: var(--primary-text-color);
+    margin: 0 0 5px 0;
+}
+
+.member-description-static {
+    font-size: 0.9rem; 
+    color: #666666;
+    line-height: 1.5;
+    margin: 0 0 15px 0; 
+    /* Ensures consistent height for description area */
+    min-height: 100px; 
+}
+
+.member-role-static {
+    /* Role is smaller and bold, placed at the very bottom */
+    order: 4; 
+    font-size: 0.9rem; 
+    font-weight: 700;
+    color: var(--primary-text-color);
+    margin: 15px 0 20px 0;
+    text-transform: uppercase;
+}
+
+/* ========================================================= */
+/* 4. Social Media Icons */
+/* ========================================================= */
+
+.social-media-icons-static {
+    order: 5; /* Ensures it is the last element */
     display: flex;
     gap: 10px;
-    z-index: 10;
-    
-    /* Initial state: Hidden and transparent */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-}
-
-.member-image-container-new:hover .social-media-overlay-new {
-    opacity: 1;
-    visibility: visible;
-}
-
-.member-image-container-new:hover .member-image-new {
-    filter: brightness(0.6); /* Darken the image on hover */
-}
-
-.social-icon-new {
-    background-color: var(--text-light); 
-    color: var(--card-background); 
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
+}
+
+.social-icon-static {
+    color: #666666; 
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
     text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.social-icon-new:hover {
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    transform: scale(1.1);
-}
-
-
-/* ========================================================= */
-/* 4. Member Details */
-/* ========================================================= */
-
-.member-details-new {
-    padding: 20px; 
-}
-
-.member-name-new {
-    font-size: 1.35rem; 
-    font-weight: 700;
-    color: var(--text-light);
-    margin: 0;
-}
-
-.member-role-new {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--primary-color);
-    margin: 5px 0 15px 0; 
-}
-
-.member-description-new {
-    font-size: 0.9rem; 
-    color: var(--text-muted);
-    line-height: 1.5;
-    margin: 0;
+.social-icon-static:hover {
+    /* Hover color matching the main accent */
+    color: var(--accent-color-orange); 
 }
 
 /* ========================================================= */
-/* 5. Responsive Adjustments (RESTORED) */
+/* 5. Responsive Adjustments */
 /* ========================================================= */
 
-@media (max-width: 1024px) {
-    /* Show 3 cards: (100% - 60px) / 3 */
-    .member-card-new {
-        width: calc( (100% - (var(--gap-size) * 2)) / 3 );
+@media (max-width: 992px) {
+    .team-members-grid-static {
+        /* 3 columns on tablet */
+        grid-template-columns: repeat(3, 1fr); 
     }
 }
 
 @media (max-width: 768px) {
-    /* Show 2 cards: (100% - 30px) / 2 */
-    .member-card-new {
-        width: calc( (100% - var(--gap-size)) / 2 );
-    }
-    .team-header-and-nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .team-header-new {
-        max-width: 100%; 
-    }
-    .team-nav-arrows-new {
-        padding-bottom: 0; 
-        margin-top: 15px;
+    .team-members-grid-static {
+        /* 2 columns on small tablets */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 600px) {
-    /* Show 1 card: 100% */
-    .member-card-new {
-        width: 100%;
+@media (max-width: 576px) {
+    .team-members-grid-static {
+        /* 1 column on mobile */
+        grid-template-columns: 1fr; 
+    }
+    .team-section {
+        padding: 50px 0;
     }
 }

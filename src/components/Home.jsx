@@ -18,7 +18,7 @@ const Home = () => {
         <Hero />
         <ServicesSection />
         <EventPromoSection /> 
-        <PortfolioSection /> 
+       {/* <PortfolioSection /> */}
         <ClientLogosSection /> 
         <AboutSection />
         <TeamSection /> 

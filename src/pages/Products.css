@@ -1,0 +1,285 @@
+/* src/pages/Products.css */
+
+:root {
+    --primary-blue: #3B4FEA; /* Hero CTA, Highlight */
+    --primary-dark: #1e293b; /* Dark background */
+    --text-white: #ffffff;
+    --text-light-grey: #cbd5e1;
+    --text-dark: #0f172a; /* Card text */
+    --card-bg-light: #ffffff; 
+    --spacing-xl: 100px;
+    --spacing-lg: 60px;
+    --spacing-md: 30px;
+}
+
+/* ========================================================= */
+/* 1. Base Container & Hero */
+/* ========================================================= */
+
+.products-page-container {
+    background-color: #f1f5f9; /* Light grey base */
+    min-height: 100vh;
+}
+
+.products-hero-section {
+    background-color: var(--primary-dark);
+    padding: var(--spacing-xl) 0;
+    color: var(--text-white);
+}
+
+.products-hero-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+}
+
+.products-hero-text {
+    flex: 1.2;
+    max-width: 600px;
+}
+
+.products-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+}
+
+.products-hero-highlight {
+    color: var(--primary-blue);
+}
+
+.products-hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light-grey);
+    margin-bottom: var(--spacing-md);
+}
+
+.products-hero-cta {
+    display: inline-block;
+    background-color: var(--primary-blue);
+    color: var(--text-white);
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.products-hero-cta:hover {
+    background-color: color-mix(in srgb, var(--primary-blue) 90%, black);
+}
+
+.products-hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.products-illustration {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+/* ========================================================= */
+/* 2. Products Grid Section */
+/* ========================================================= */
+
+.products-grid-section {
+    padding: var(--spacing-lg) 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.grid-section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.grid-section-subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: var(--spacing-lg);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.product-card {
+    background-color: var(--card-bg-light);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Modern, soft shadow */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid var(--product-base-color); /* Colored top border */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-icon-wrapper {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f1f5f9; /* Light background for the icon */
+}
+
+.product-icon {
+    font-size: 1.5rem;
+}
+
+.product-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: var(--product-base-color);
+    background-color: color-mix(in srgb, var(--product-base-color) 10%, white);
+}
+
+.product-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 10px 0;
+}
+
+.product-description {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1; /* Pushes the link to the bottom */
+}
+
+.product-card-link {
+    display: inline-block;
+    color: var(--product-base-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: padding-left 0.2s ease;
+}
+
+.product-card-link:hover {
+    padding-left: 5px;
+}
+
+
+/* ========================================================= */
+/* 3. Final CTA Section */
+/* ========================================================= */
+
+.products-cta-section {
+    background-color: var(--primary-dark);
+    color: var(--text-white);
+    padding: var(--spacing-xl) 40px;
+    text-align: center;
+}
+
+.cta-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    color: var(--text-light-grey);
+    margin-bottom: var(--spacing-md);
+}
+
+.products-final-cta-button {
+    display: inline-block;
+    background-color: #f0f0f0; /* Light background to contrast dark section */
+    color: var(--primary-dark);
+    padding: 15px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    transition: background-color 0.3s ease;
+}
+
+.products-final-cta-button:hover {
+    background-color: #ffffff;
+}
+
+.cta-quote {
+    font-style: italic;
+    color: #94a3b8;
+    margin-top: 20px;
+    border-left: 3px solid var(--primary-blue);
+    padding-left: 15px;
+    display: block;
+    max-width: 600px;
+    margin: 30px auto 0 auto;
+    text-align: left;
+}
+
+
+/* ========================================================= */
+/* 4. Responsive Adjustments */
+/* ========================================================= */
+
+@media (max-width: 992px) {
+    .products-hero-wrapper {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .products-hero-image {
+        margin-top: var(--spacing-md);
+        justify-content: center;
+    }
+
+    .products-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .products-grid-section {
+        padding: var(--spacing-md) 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .products-hero-title {
+        font-size: 2rem;
+    }
+    .grid-section-title {
+        font-size: 1.8rem;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}

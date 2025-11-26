@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './Navbar.css';
 import mainLogo from '../assets/Main-Logo-01.png'; 
 // *** NEW ICON IMPORTS ***
-// IMPORTED FaWhatsapp HERE
 import { FaInstagram, FaDribbble, FaLinkedin, FaChevronDown, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6'; 
 
@@ -23,13 +22,17 @@ const socialLinks = [
 
 // Dropdown items for the SERVICES link
 const serviceDropdownItems = [
-    // 💥 Updated link for the new Odoo page
+
+  // CORRECTLY LINKED: Digital Marketing
+    { title: 'Digital Marketing', href: '/services/digital-marketing' },
+    // CORRECTLY LINKED: Software Development
+    { title: 'Software Development', href: '/software-development' },
+    // Updated link for the Odoo page (already correct)
     { title: 'Odoo ERP Implementation', href: '/services/odoo-erp' },
-    { title: 'Software Development', href: '/' },
-    { title: 'Digital Marketing', href: '/' },
-    { title: 'Mobile Application Development', href: '/' },
-    { title: 'Enterprise Application Development', href: '/' },
-    { title: 'System Intergration', href: '/' },
+    // Placeholder links (Mobile link matches the assumption: /services/mobile)
+    { title: 'Mobile Application Development', href: '/services/mobile' },
+    { title: 'Enterprise Application Development', href: '/services/enterprise' },
+    { title: 'System Intergration', href: '/services/integration' },
 ];
 
 // Helper Component for Social Icons
@@ -112,6 +115,7 @@ const Navbar = () => {
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <div className="nav-links nav-dropdown-header">
+                {/* Changed the base link for SERVICES to '#' since it's a dropdown host */}
                 <a href="/services" className="nav-link-base" onClick={toggleDrawer}>SERVICES</a>
                 {/* Chevron icon for desktop */}
                 <FaChevronDown className={`dropdown-icon ${isDropdownOpen ? 'rotated' : ''}`} onClick={handleDropdownToggle} />
@@ -150,14 +154,14 @@ const Navbar = () => {
             <a href="/team" className="nav-links" onClick={toggleDrawer}>TEAM</a>
           </li>
           
-          {/* 5. CONTACT (NEWLY ADDED) */}
+          {/* 5. PRODUCTS (NEW POSITION) */}
+          <li className="nav-item">
+            <a href="/products" className="nav-links" onClick={toggleDrawer}>PRODUCTS</a>
+          </li>
+
+          {/* 6. CONTACT (NEW POSITION) */}
           <li className="nav-item">
             <a href="/contact" className="nav-links" onClick={toggleDrawer}>CONTACT</a>
-          </li>
-          
-          {/* 6. NEWS */}
-          <li className="nav-item">
-            <a href="/news" className="nav-links" onClick={toggleDrawer}>PRODUCTS</a>
           </li>
           
           {/* Social Icons for Mobile Drawer */}

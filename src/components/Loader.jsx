@@ -1,22 +1,16 @@
 // src/components/Loader.jsx
 import React from 'react';
 import './Loader.css';
+import mainLogo from '../assets/Main-Logo-01.png'; 
 
 const Loader = () => {
   return (
     <div className="loader-overlay">
-      <div className="loader-grid">
-        {/* We'll create 9 squares for a 3x3 grid */}
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-        <div className="loader-square"></div>
-      </div>
+      <img 
+        src={mainLogo} 
+        alt="Beytech Software Group Logo Loading" 
+        className="loading-logo" 
+      />
     </div>
   );
 };

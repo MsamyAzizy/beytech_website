@@ -32,6 +32,30 @@ const useVisibilityEffect = (options) => {
 };
 // ------------------------------------------------------------------
 
+// --- Helper function to generate random values for animations ---
+const getRandomAnimationProps = () => {
+    const factor = 1; // Adjust this to control intensity
+    return {
+        '--explode-x': `${Math.random() * 400 * (Math.random() > 0.5 ? 1 : -1) * factor}px`,
+        '--explode-y': `${Math.random() * 300 * (Math.random() > 0.5 ? 1 : -1) * factor}px`,
+        '--explode-rotX': `${Math.random() * 90 * (Math.random() > 0.5 ? 1 : -1)}deg`,
+        '--explode-rotY': `${Math.random() * 90 * (Math.random() > 0.5 ? 1 : -1)}deg`,
+
+        '--entry-x': `${Math.random() * 400 * (Math.random() > 0.5 ? 1 : -1) * factor}px`,
+        '--entry-y': `${Math.random() * 300 * (Math.random() > 0.5 ? 1 : -1) * factor}px`,
+        '--entry-rotX': `${Math.random() * 90 * (Math.random() > 0.5 ? 1 : -1)}deg`,
+        '--entry-rotY': `${Math.random() * 90 * (Math.random() > 0.5 ? 1 : -1)}deg`,
+
+        '--random-x': `${Math.random() * 50 * (Math.random() > 0.5 ? 1 : -1)}px`, // Mid-point slight randomness
+        '--random-y': `${Math.random() * 50 * (Math.random() > 0.5 ? 1 : -1)}px`,
+        '--random-rotX': `${Math.random() * 20 * (Math.random() > 0.5 ? 1 : -1)}deg`,
+        '--random-rotY': `${Math.random() * 20 * (Math.random() > 0.5 ? 1 : -1)}deg`,
+        '--random-scale': `${1 + Math.random() * 0.2 - 0.1}`, // Small scale variation
+    };
+};
+// ------------------------------------------------------------------
+
+
 // Placeholder images for the projects (replace with your actual image paths)
 import projectImage1 from '../assets/CCTV.jpeg'; 
 import projectImage2 from '../assets/IOT.jpeg'; 
@@ -39,12 +63,15 @@ import projectImage3 from '../assets/MAL.jpeg';
 import projectImage4 from '../assets/MOBILE.jpeg'; 
 import projectImage5 from '../assets/pharmacy.png'; 
 import projectImage6 from '../assets/winny.png'; 
+import projectImage7 from '../assets/MOBILE.jpeg'; 
+import projectImage8 from '../assets/MOBILE.jpeg'; 
+import projectImage9 from '../assets/MOBILE.jpeg'; 
+
 
 const projects = [
     {
         id: 1,
         category: 'Mobile Apps',
-        // UPDATED TEXT
         title: 'Real-Time Fleet Management System',
         description: 'Developed a high-performance native mobile application for logistics tracking, featuring geo-fencing and real-time data sync for delivery optimization.',
         tags: ['React Native', 'Geo-Fencing', 'Redux'],
@@ -55,7 +82,6 @@ const projects = [
     {
         id: 2,
         category: 'Web Development',
-        // UPDATED TEXT
         title: 'Scalable SaaS E-learning Platform',
         description: 'Engineered a multi-tenant education platform using Next.js and serverless functions, supporting millions of concurrent users and secure content delivery.',
         tags: ['Next.js', 'Serverless', 'Microservices'],
@@ -66,7 +92,6 @@ const projects = [
     {
         id: 3,
         category: 'Branding',
-        // UPDATED TEXT
         title: 'AI Startup Visual Identity',
         description: 'Comprehensive brand overhaul and design system creation for a B2B machine learning company, ensuring a modern, trust-inspiring aesthetic across all touchpoints.',
         tags: ['Design System', 'Logo', 'Art Direction'],
@@ -77,7 +102,6 @@ const projects = [
     {
         id: 4,
         category: 'UI/UX Design',
-        // UPDATED TEXT
         title: 'Enterprise Data Visualization Dashboard',
         description: 'Designed an intuitive and complex dashboard interface for visualizing large financial datasets, reducing reporting time by 40% through enhanced UX.',
         tags: ['Figma', 'Data Viz', 'User Testing'],
@@ -88,7 +112,6 @@ const projects = [
     {
         id: 5,
         category: 'Web Development',
-        // UPDATED TEXT
         title: 'Custom Headless E-commerce Solution',
         description: 'Built a decoupled, high-speed e-commerce storefront using Shopify (Headless) and a Django backend for custom order processing and inventory management.',
         tags: ['Shopify Headless', 'Django', 'GraphQL'],
@@ -99,7 +122,6 @@ const projects = [
     {
         id: 6,
         category: 'Mobile Apps',
-        // UPDATED TEXT
         title: 'Secure Fintech Investment Tracker',
         description: 'A cross-platform mobile app offering secure portfolio tracking, real-time stock market data, and biometric authentication for seamless user access.',
         tags: ['React Native', 'Fintech', 'Biometrics'],
@@ -107,9 +129,50 @@ const projects = [
         year: 2024,
         cornerTag: 'Featured',
     },
+    {
+        id: 7,
+        category: 'Web Development',
+        title: 'Custom ERP Logistics Module',
+        description: 'Integrated a tailored module into an existing Odoo ERP system to manage complex international freight and customs documentation.',
+        tags: ['Odoo', 'Python/Odoo', 'PostgreSQL'],
+        imgSrc: projectImage7,
+        year: 2023,
+        cornerTag: 'Integration',
+    },
+    {
+        id: 8,
+        category: 'Branding',
+        title: 'Fintech App Icon & Micro-Animations',
+        description: 'Designed a unique, modern app icon and a suite of subtle, delightful micro-animations to enhance user interaction and brand recall for a financial app.',
+        tags: ['Lottie', 'UI Animation', 'Illustrator'],
+        imgSrc: projectImage8,
+        year: 2024,
+        cornerTag: 'Design Lead',
+    },
+    {
+        id: 9,
+        category: 'UI/UX Design',
+        title: 'Hospital Management System Redesign',
+        description: 'Complete UX overhaul of a legacy hospital management system, focusing on reducing administrative error rates and improving nurse workflow efficiency.',
+        tags: ['UX Research', 'Wireframing', 'Accessibility'],
+        imgSrc: projectImage9,
+        year: 2024,
+        cornerTag: 'Ongoing',
+    },
 ];
 
 const categories = ['All', 'Web Development', 'Mobile Apps', 'Branding', 'UI/UX Design'];
+// Define the required categories array for easy comparison
+const REQUIRED_CATEGORIES = ["All", "Web Development", "Mobile Apps", "Branding", "UI/UX Design"];
+
+// Helper function to check if the current categories array matches the required one
+const categoriesMatch = (current, required) => {
+    if (current.length !== required.length) {
+        return false;
+    }
+    // Check if every element in the current array matches the corresponding element in the required array
+    return current.every((value, index) => value === required[index]);
+};
 
 const PortfolioSection = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -117,13 +180,21 @@ const PortfolioSection = () => {
     const [outgoingProjects, setOutgoingProjects] = useState([]); 
     const [incomingProjects, setIncomingProjects] = useState([]); 
     const [isTransitioning, setIsTransitioning] = useState(false);
+    
+    // Create refs and visibility states for different parts
     const [sectionRef, isSectionVisible] = useVisibilityEffect({ threshold: 0.1 });
+    const [headerRef, isHeaderVisible] = useVisibilityEffect({ threshold: 0.5 });
+    // Check filter visibility only if we decide to render them
+    const [filtersRef, isFiltersVisible] = useVisibilityEffect({ threshold: 0.3 });
+    
+    // Check if we should show the filters at all
+    const shouldShowFilters = categoriesMatch(categories, REQUIRED_CATEGORIES);
 
     const TRANSITION_DURATION = 450; // Milliseconds, MUST match CSS filter-animation-duration
 
     useEffect(() => {
-        // Initial load
-        setDisplayProjects(projects);
+        // Initial load: Add randomProps to initial projects
+        setDisplayProjects(projects.map(p => ({ ...p, randomProps: getRandomAnimationProps() })));
     }, []);
 
     const handleCategoryChange = (cat) => {
@@ -133,23 +204,43 @@ const PortfolioSection = () => {
         setSelectedCategory(cat);
 
         const currentProjects = displayProjects;
+        
+        // Prepare new projects with random animation properties
         const newFilteredProjects = cat === 'All'
-            ? projects
-            : projects.filter(project => project.category === cat);
+            ? projects.map(p => ({ ...p, randomProps: getRandomAnimationProps() })) 
+            : projects.filter(project => project.category === cat).map(p => ({ ...p, randomProps: getRandomAnimationProps() }));
 
-        // Identify projects that are leaving and entering
-        const leaving = currentProjects.filter(p => !newFilteredProjects.some(np => np.id === p.id));
+        // Use a Set for efficient lookup of new project IDs
+        const newFilteredProjectIds = new Set(newFilteredProjects.map(np => np.id));
+
+        // Identify leaving projects, retaining their current randomProps
+        const leaving = currentProjects.filter(p => !newFilteredProjectIds.has(p.id));
+        
+        // Identify entering projects, which are in the new list but not the current list
         const entering = newFilteredProjects.filter(np => !currentProjects.some(p => p.id === np.id));
         
+        // Combine all projects (current + incoming + leaving) to render the animation
+        const projectsToRender = newFilteredProjects
+            .filter(np => !entering.some(e => e.id === np.id)) 
+            .map(np => {
+                const existing = currentProjects.find(p => p.id === np.id);
+                return existing ? existing : np;
+            })
+            .concat(entering) 
+            .concat(leaving); 
+
+            
         setOutgoingProjects(leaving);
         setIncomingProjects(entering);
+        setDisplayProjects(projectsToRender);
 
-        // This setTimeout should match the duration of the 'exit' animation
+
         setTimeout(() => {
-            setDisplayProjects(newFilteredProjects); // Update the displayed projects
-            setOutgoingProjects([]); // Clear outgoing
-            setIncomingProjects([]); // Clear incoming
-            setIsTransitioning(false); // End transition
+            // After animation, filter down to the final set of projects
+            setDisplayProjects(newFilteredProjects); 
+            setOutgoingProjects([]); 
+            setIncomingProjects([]); 
+            setIsTransitioning(false); 
         }, TRANSITION_DURATION); 
     };
 
@@ -157,29 +248,33 @@ const PortfolioSection = () => {
         <section className="portfolio-section" ref={sectionRef}>
             <div className="portfolio-container">
                 
-                {/* --- NEW HEADER STRUCTURE --- */}
-                <div className="portfolio-header">
+                {/* --- HEADER STRUCTURE with new visibility class --- */}
+                <div className={`portfolio-header ${isHeaderVisible ? 'is-visible-fade-up' : 'initial-hidden'}`} ref={headerRef}>
                     <h2 className="portfolio-title">Recent Projects & Case Studies</h2>
                     <hr className="header-underline" />
                     <p className="portfolio-description">
                         Explore our featured work, demonstrating our expertise in full-stack development, design, and branding.
                     </p>
                 </div>
-                {/* --- END HEADER STRUCTURE --- */}
+                
+                {/* 💥 CONDITIONAL RENDERING: Only show filters if categories array matches the required list */}
+                {shouldShowFilters && (
+                    <div className={`category-filters ${isFiltersVisible ? 'is-visible-fade-up' : 'initial-hidden'}`} ref={filtersRef}>
+                        {categories.map((cat, index) => (
+                            <button
+                                key={index}
+                                className={`filter-button ${selectedCategory === cat ? 'active' : ''}`}
+                                onClick={() => handleCategoryChange(cat)}
+                                disabled={isTransitioning} 
+                                style={{ animationDelay: isFiltersVisible ? `${0.1 * index}s` : '0s' }}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                )}
+                {/* END CONDITIONAL RENDERING */}
 
-                {/* Category Filter Buttons */}
-                <div className="category-filters">
-                    {categories.map((cat, index) => (
-                        <button
-                            key={index}
-                            className={`filter-button ${selectedCategory === cat ? 'active' : ''}`}
-                            onClick={() => handleCategoryChange(cat)}
-                            disabled={isTransitioning} 
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
 
                 {/* Projects Grid */}
                 <div className="projects-grid">
@@ -192,13 +287,15 @@ const PortfolioSection = () => {
                             <div 
                                 key={project.id} 
                                 className={`project-card 
-                                    ${isSectionVisible ? 'is-visible-fade-up' : 'initial-hidden'}
+                                    ${isSectionVisible ? 'is-visible-fade-up-staggered' : 'initial-hidden'}
                                     ${isLeaving ? 'animate-out-crosscut' : ''}
                                     ${isEntering && !isLeaving ? 'animate-in-crosscut' : ''}
                                 `}
+                                // Adjusted delay to account for staggered initial load and transitions
                                 style={{ 
-                                    animationDelay: `${isLeaving ? 0 : delay}s`, 
-                                    transitionDelay: `${isLeaving ? 0 : delay}s` 
+                                    animationDelay: isLeaving ? '0s' : isEntering ? '0s' : isSectionVisible ? `${delay}s` : '0s', 
+                                    transitionDelay: isLeaving ? '0s' : isEntering ? '0s' : isSectionVisible ? `${delay}s` : '0s',
+                                    ...(project.randomProps || {}) // Apply random properties for explosion effect
                                 }}
                             >
                                 <div className="project-image-wrapper">
@@ -210,7 +307,7 @@ const PortfolioSection = () => {
                                         <span className="project-category">{project.category}</span>
                                         <span className="project-year">{project.year}</span>
                                     </div>
-                                    <h3 className="projeAct-title">{project.title}</h3>
+                                    <h3 className="project-title">{project.title}</h3> 
                                     <p className="project-description">{project.description}</p>
                                     <div className="project-tags">
                                         {project.tags.map((tag, tagIndex) => (
