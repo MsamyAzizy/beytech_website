@@ -5,7 +5,7 @@ import { FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa'; // Only ke
 
 // Placeholder imports for team member images (Using generic placeholder)
 // NOTE: These images should be circular or easily crop to circles.
-import B_placeholderImg from '../assets/B.png'; 
+import B_placeholderImg from '../assets/benjamin_passport-300x300 (1).png'; 
 
 
 // Placeholder data structure for the 4 members visible in the image

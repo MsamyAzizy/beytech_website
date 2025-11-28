@@ -52,16 +52,35 @@
   line-height: 1.2;
   text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
   margin-bottom: 20px;
+  display: flex; 
+  flex-direction: column;
+  height: 1.2em; 
+  overflow: hidden; 
 }
 
-.cursor {
-  font-weight: 600;
-  color: #ffcc00;
-  animation: blink 0.7s infinite;
+/* 💥 Keyframes for the Rotating/Final Text */
+@keyframes slideIn {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes blink {
-  0%,100%{opacity:1}50%{opacity:0}
+@keyframes slideOut {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(50px); }
+}
+
+/* 💥 Style for the rotating span element */
+.rotating-line {
+    display: block; 
+    white-space: nowrap; 
+    /* In: 0.5s, Visible: 1.5s, Out: 0.5s -> Total 2.5s cycle */
+    animation: slideIn 0.5s ease-out 0s forwards, 
+               slideOut 0.5s ease-in 1.5s forwards; 
+}
+
+/* 💥 Final text state: stay visible */
+.rotating-line.final {
+    animation: slideIn 0.5s ease-out forwards; /* Only slide in and stay */
 }
 
 @keyframes slideInFromLeft {
