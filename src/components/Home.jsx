@@ -1,5 +1,4 @@
 // src/components/Home.jsx 
-
 import React from 'react';
 import Hero from './Hero'; 
 import AboutSection from './AboutSection'; 
@@ -9,7 +8,6 @@ import TeamSection from './TeamSection';
 import ServicesSection from './ServicesSection'; 
 import PortfolioSection from './PortfolioSection'; 
 import ContactSection from './ContactSection'; 
-
 
 const Home = () => {
   return (

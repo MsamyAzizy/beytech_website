@@ -6,11 +6,15 @@ import mainLogo from '../assets/Main-Logo-01.png';
 const Loader = () => {
   return (
     <div className="loader-overlay">
-      <img 
-        src={mainLogo} 
-        alt="Beytech Software Group Logo Loading" 
-        className="loading-logo" 
-      />
+      <div className="loader-container">
+        <div className="loader-background">
+          <img 
+            src={mainLogo} 
+            alt="Beytech Software Group Logo Loading" 
+            className="loading-logo" 
+          />
+        </div>
+      </div>
     </div>
   );
 };

@@ -11,8 +11,9 @@ import Home from './components/Home';
 // --- MAIN PAGE COMPONENTS ---
 import AboutBey from './components/AboutBey'; 
 import PortfolioSection from './components/PortfolioSection'; 
+import Products from './pages/Products'; 
 
-// --- SERVICE & PAGE IMPORTS (Placeholders) ---
+// --- SERVICE & PAGE IMPORTS ---
 import DigitalMarketing from './pages/DigitalMarketing'; 
 const Team = () => <div>Team Page Content</div>;
 const Contact = () => <div>Contact Us Page Content</div>;
@@ -25,71 +26,67 @@ const SystemIntegration = () => <div>System Integration Page Content</div>;
 
 import './index.css';
 
-// Component to manage conditional loading logic
 function AppContent() {
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
-  
-  // 💥 NEW LOGIC: Loader appears if we are on the Home page.
-  // It is set to true/false based purely on the route and the timer.
-  const [showLoader, setShowLoader] = useState(isHomePage);
-  
-  const TOTAL_ANIMATION_TIME_MS = 2300; // Time needed for logo animation (1.9s + margin)
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+  const LOADER_DURATION = 2000; // 2 seconds total
 
   useEffect(() => {
-    // 💥 The loader runs every time the route changes to Home.
-    if (isHomePage) {
-      // 1. Set showLoader to true immediately when the component renders on the Home route
-      setShowLoader(true);
-      
-      // 2. Hide the loader after the animation completes
-      const timer = setTimeout(() => {
-        setShowLoader(false);
-      }, TOTAL_ANIMATION_TIME_MS);
-
-      return () => clearTimeout(timer); // Cleanup the timer on unmount or route change
-    } 
+    // Only show loader on home page
+    const isHomePage = location.pathname === '/';
     
-    // 3. Ensure the loader is hidden immediately on all other routes
-    if (!isHomePage) {
-      setShowLoader(false);
+    if (isHomePage) {
+      // Show loader only for home page
+      setIsLoading(true);
+      setShowContent(false);
+
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        // Small delay before showing content for clean transition
+        setTimeout(() => {
+          setShowContent(true);
+        }, 50);
+      }, LOADER_DURATION);
+
+      return () => clearTimeout(timer);
+    } else {
+      // For other pages, show content immediately without loader
+      setIsLoading(false);
+      setShowContent(true);
     }
+  }, [location.pathname]); // Re-run when route changes
 
-  }, [isHomePage]); // Dependency on the route changes
-
-  // --- Render Logic ---
   return (
     <>
-      {/* Conditionally render the Loader */}
-      {showLoader && <Loader />} 
-
-      {/* Main application structure */}
-      <Navbar /> 
+      {/* Show loader ONLY on home page */}
+      {isLoading && location.pathname === '/' && <Loader />}
       
-      <Routes>
-        {/* 1. Top-Level Pages */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutBey />} />
-        {/* ... (rest of your routes) ... */}
-        <Route path="/team" element={<Team />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/products" element={<PortfolioSection />} />
-        <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
-        <Route path="/software-development" element={<SoftwareDevelopment />} />
-        <Route path="/services/odoo-erp" element={<OdooPage />} />
-        <Route path="/services/mobile" element={<MobileApplication />} />
-        <Route path="/services/enterprise" element={<EnterpriseApplication />} />
-        <Route path="/services/integration" element={<SystemIntegration />} />
-
-      </Routes>
-      
-      <Footer />
+      {/* Show content after loading completes or immediately for other pages */}
+      {showContent && (
+        <>
+          <Navbar /> 
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutBey />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+            <Route path="/software-development" element={<SoftwareDevelopment />} />
+            <Route path="/services/odoo-erp" element={<OdooPage />} />
+            <Route path="/services/mobile" element={<MobileApplication />} />
+            <Route path="/services/enterprise" element={<EnterpriseApplication />} />
+            <Route path="/services/integration" element={<SystemIntegration />} />
+          </Routes>
+          <Footer />
+        </>
+      )}
     </>
   );
 }
 
-// Main App Component to provide the Router context
 export default function App() {
     return (
         <Router>

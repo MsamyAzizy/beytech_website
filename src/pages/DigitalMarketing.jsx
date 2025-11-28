@@ -1,111 +1,106 @@
 // src/pages/DigitalMarketing.jsx
-
 import React from 'react';
 import './DigitalMarketing.css';
-// 💥 NEW: Import the hero illustration image
-import DigitalMarketingHeroIllustration from '../assets/hero-image_dspush1025.webp'; 
+import DigitalMarketingHeroIllustration from '../assets/hero-image_dspush1025.webp';
 
-// --- Digital Marketing Service Data ---
+// Services Data
 const marketingServicesData = [
   {
     id: 1,
     title: "SEO Optimization",
-    icon: "fas fa-tag", 
-    description: "Drive organic growth and maximize visibility. We focus on technical SEO audits, strategic keyword mapping, and content optimization to rank you higher.", 
-    color: "#00BA5E" // Green
+    icon: "fas fa-tag",
+    description: "Drive organic growth and maximize visibility with advanced SEO strategies. We conduct technical audits, optimize content, build authoritative backlinks.",
+    color: "#00BA5E"
   },
   {
     id: 2,
     title: "Web Analysis",
-    icon: "fas fa-chart-bar", 
-    description: "Translate complex data into actionable insights. We implement advanced analytics tracking and conversion funnels to identify performance bottlenecks and opportunities.", 
-    color: "#F63C6D" // Red/Pink
+    icon: "fas fa-chart-bar",
+    description: "Translate complex data into actionable insights using advanced analytics tools. We track user behavior, conversion funnels, and website performance.",
+    color: "#F63C6D"
   },
   {
     id: 3,
     title: "Email Automation",
-    icon: "fas fa-envelope", 
-    description: "Automate personalized customer journeys. Deploy segmented email campaigns and nurturing sequences designed to convert leads and retain high-value clients.", 
-    color: "#3B4FEA" // Blue
+    icon: "fas fa-envelope",
+    description: "Automate personalized customer journeys with targeted email campaigns.We design segmentation strategies, nurture sequences,and trigger-based communications.",
+    color: "#3B4FEA"
   },
   {
     id: 4,
-    title: "Conversion Optimization (CRO)",
-    icon: "fas fa-funnel-dollar", 
-    description: "Leverage A/B testing and user heatmaps to optimize page elements. We systematically boost conversion rates for landing pages and checkout flows.", 
-    color: "#F59E0B" // Amber/Yellow
+    title: "Conversion Optimization",
+    icon: "fas fa-funnel-dollar",
+    description: "Boost conversion rates and revenue through systematic CRO practices. We leverage A/B testing, user heatmaps, landing page optimization, and behavioral.",
+    color: "#F59E0B"
   },
   {
     id: 5,
     title: "Social Media Strategy",
-    icon: "fab fa-facebook-square", 
-    description: "Develop data-driven social strategies based on audience segmentation and platform analytics to maximize engagement and lead generation across channels.", 
-    color: "#8B5CF6" // Violet/Purple
+    icon: "fab fa-facebook-square",
+    description: "Maximize engagement and lead generation across social platforms with strategic campaigns. We analyze audience behavior, craft platform-specific content, and implement paid and organic.",
+    color: "#8B5CF6"
   },
   {
     id: 6,
     title: "PPC Management",
-    icon: "fas fa-search-dollar", 
-    description: "Execute highly technical search engine and social media ad campaigns, focusing on bid optimization algorithms and precise audience targeting for maximum ROI.", 
-    color: "#06B6D4" // Cyan/Light Blue
+    icon: "fas fa-search-dollar",
+    description: "Execute precise and high-performing paid campaigns across search engines and social media. We focus on bid optimization, audience targeting, ad copy testing, and continuous monitoring.",
+    color: "#06B6D4"
   },
 ];
-// -----------------------------
 
+
+// Animation classes for random assignment
+const animationClasses = ["slide-up", "fade-in", "zoom-in", "rotate-in"];
 
 const DigitalMarketing = () => {
   return (
-    <div className="marketing-page-container">
+    <div className="digital-marketing-page">
 
-      {/* 💥 HERO SECTION */}
-      <div className="marketing-hero-section">
-        <div className="hero-content-wrapper">
-          <div className="hero-text-block">
-            <p className="hero-pre-title animate-in-slideup">LET US MARKETING YOUR BUSINESS</p>
-            {/* 💥 MODIFIED CLASS: Added 'animated-text-background' for the effect */}
-            <h1 className="hero-main-title animated-text-background animate-in-slideup" style={{ animationDelay: '0.2s' }}>YOUR WEBSITE STAND OUT</h1>
-            <p className="hero-description animate-in-slideup" style={{ animationDelay: '0.4s' }}>
-              "Navigating the complexities of modern software development requires deep technical expertise across multiple stacks.
-               We specialize in building custom, cross-platform applications, leveraging best practices in clean code and CI/CD pipelines to guarantee stability,
-                security, and long-term maintainability, delivering true ROI on your technology investment."
+      {/* HERO SECTION */}
+      <section className="dm-hero-section">
+        <div className="dm-hero-wrapper">
+          <div className="dm-hero-text">
+            <p className="dm-pretitle">LET US MARKET YOUR BUSINESS</p>
+            <h1 className="dm-title animated-gradient-text">
+              YOUR WEBSITE STANDS OUT
+            </h1>
+            <p className="dm-description">
+              Navigating modern software & marketing requires technical expertise. We build data-driven strategies to maximize ROI and elevate your brand online.
             </p>
-            <button className="hero-cta-button animate-in-slideup" style={{ animationDelay: '0.6s' }}>LEARN MORE</button>
+            <button className="dm-cta-button">LEARN MORE</button>
           </div>
-          <div className="hero-image-block">
-            <img 
-              src={DigitalMarketingHeroIllustration} 
-              alt="Digital Marketing Illustration" 
-              className="hero-illustration animate-in-zoom" 
-            />
+          <div className="dm-hero-image">
+            <img src={DigitalMarketingHeroIllustration} alt="Digital Marketing" className="dm-hero-illustration" />
           </div>
         </div>
-        {/* Abstract shapes/elements */}
-        <div className="abstract-shape-1 animate-in-shape" style={{ animationDelay: '0.8s' }}></div>
-        <div className="abstract-shape-2 animate-in-shape" style={{ animationDelay: '1.0s' }}></div>
-        <div className="abstract-shape-3 animate-in-shape" style={{ animationDelay: '1.2s' }}></div>
-        <div className="abstract-shape-4 animate-in-shape" style={{ animationDelay: '1.4s' }}></div>
-      </div>
 
-      {/* 💥 SERVICE CARDS SECTION */}
-      <div className="marketing-cards-section">
-        <div className="service-cards-grid-image-style animate-cards-stagger">
-          {marketingServicesData.map((service, index) => (
-            <div 
-              key={service.id} 
-              className="service-card-image-style card-animate-in" 
-              style={{ 
-                // 💥 MODIFIED: Passing the color as a CSS variable instead of background-color
-                '--card-base-color': service.color, 
-                animationDelay: `${0.2 * (index + 1) + 0.8}s` 
-              }} 
-            >
-              <i className={`${service.icon} card-icon-image-style`}></i> 
-              <h3>{service.title}</h3>
-              <p className="card-description-image-style">{service.description}</p>
-            </div>
-          ))}
+        {/* Abstract floating shapes */}
+        <div className="dm-abstract-shape shape1"></div>
+        <div className="dm-abstract-shape shape2"></div>
+        <div className="dm-abstract-shape shape3"></div>
+        <div className="dm-abstract-shape shape4"></div>
+      </section>
+
+      {/* SERVICE CARDS SECTION */}
+      <section className="dm-services-section">
+        <div className="dm-services-grid">
+          {marketingServicesData.map((service, index) => {
+            const randomAnim = animationClasses[Math.floor(Math.random() * animationClasses.length)];
+            return (
+              <div 
+                key={service.id} 
+                className={`dm-service-card ${randomAnim}`} 
+                style={{ '--card-color': service.color, animationDelay: `${index * 0.2}s` }}
+              >
+                <i className={`${service.icon} dm-card-icon`}></i>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            );
+          })}
         </div>
-      </div>
+      </section>
     </div>
   );
 };

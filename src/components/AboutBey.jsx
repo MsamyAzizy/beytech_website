@@ -1,92 +1,146 @@
 // src/components/AboutBey.jsx
-import React from 'react';
-//import Navbar from './Navbar'; 
-import CoreValuesSection from './CoreValuesSection'; // <-- NEW IMPORT
+import React, { useState, useEffect } from 'react';
+import CoreValuesSection from './CoreValuesSection';
 import './AboutBey.css';
-// Assuming you have an image named 'office_setup.jpg' in src/assets/
-import OfficeImage from '../assets/bey1.png'; 
-import BeyVideo from '../assets/bey.mp4'; 
-// The rest of the component remains the same...
+
+import OfficeImage1 from '../assets/kindpng_146443.png';
+import OfficeImage2 from '../assets/hero-image_dspush1025.webp';
+import OfficeImage3 from '../assets/kindpng_146462.png';
+
+import BeyVideo from '../assets/bey.mp4';
 
 const AboutBey = () => {
+
+    const sliderImages = [OfficeImage1, OfficeImage2, OfficeImage3];
+    const [slideIndex, setSlideIndex] = useState(0);
+
+    // Auto slide effect
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSlideIndex((prev) => (prev + 1) % sliderImages.length);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="about-bey-page">
-            
-            {/* Top Hero Section: "Who We Are" */}
+
+            {/* ===================== HERO SECTION ===================== */}
             <header className="about-hero-section">
-                {/* ... video elements ... */}
                 <video autoPlay loop muted playsInline className="hero-background-video">
                     <source src={BeyVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
                 </video>
-                <div className="hero-video-overlay"></div> 
-                
+
+                <div className="hero-video-overlay"></div>
+
                 <div className="hero-content">
-                    <h1 className="hero-title-mains">Who We Are</h1>
-                    <h1 className="hero-title-main">Control Your Business With Us</h1>
-                    
+                    <h1 className="hero-title-primary">Who We Are</h1>
+                    <h2 className="hero-title-secondary">Control Your Business With Us</h2>
                 </div>
             </header>
 
             <main className="about-main-content-area">
-                
-                {/* Intro Section */}
+
+                {/* ===================== INTRO SECTION ===================== */}
                 <section className="about-intro-section">
                     <div className="intro-container">
                         <h2 className="intro-title">ABOUT US</h2>
                         <hr className="intro-underline" />
                         <p className="intro-description">
-                            Leveraging advanced technologies to deliver scalable solutions that exceed expectations.
+                            Bey Technology is a modern IT solutions company helping organizations digitize,
+                            automate and scale using intelligent business technologies.
                         </p>
                     </div>
                 </section>
 
-                {/* Story and Service Details */}
+                {/* ===================== STORY SECTION ===================== */}
                 <section className="about-details-section">
                     <div className="details-container">
-                        
+
+                        {/* ===== IMAGE SLIDER ===== */}
                         <div className="details-image-container">
-                            <img 
-                                src={OfficeImage} 
-                                alt="Modern office interior with team members" 
-                                className="details-main-image"
-                            />
+                            {sliderImages.map((img, i) => (
+                                <img
+                                    key={i}
+                                    src={img}
+                                    alt="Office Slide"
+                                    className={`details-slider-image ${i === slideIndex ? 'active' : ''}`}
+                                />
+                            ))}
                         </div>
-                        
+
+                        {/* ===== TEXT SECTION ===== */}
                         <div className="details-text-container">
-                            <div className="text-block">
-                                <h3 className="story-heading">Our Story</h3>
-                                <p className="story-paragraph">
-                                    At Bey Technologies, we are passionate about helping businesses succeed by delivering cutting-edge 
-                                    IT solutions tailored to their unique needs. Based in Dar es Salaam, Tanzania,
-                                     we specialize in Odoo ERP implementation, IT consultancy, software development, digital marketing, and much more..
-                                </p>
-                            </div>
                             
                             <div className="text-block">
-                                <h3 className="service-heading">In Software Development</h3>
-                                <p className="service-paragraph">
-                                    We address the evolving social and business technology challenges by defining, 
-                                    designing, and developing applications tailored to meet our community's 
-                                    requirements.
+                                <h3 className="section-heading">Our Story</h3>
+                                <p className="section-paragraph">
+                                    Founded in Dar es Salaam, Bey Technology provides modern IT solutions 
+                                    designed to help businesses operate efficiently and achieve measurable growth. 
+                                    We specialize in Odoo ERP, IT consultancy, custom software development, 
+                                    cybersecurity, digital marketing, and digital transformation.
                                 </p>
                             </div>
 
                             <div className="text-block">
-                                <h3 className="service-heading">In Cyber Security</h3>
-                                <p className="service-paragraph">
-                                    Our comprehensive security services ensure data integrity and compliance, 
-                                    protecting your digital assets from emerging threats with proactive defense strategies.
+                                <h3 className="section-heading">Software Development</h3>
+                                <p className="section-paragraph">
+                                    We build secure, scalable and user-centered applications that solve real-world business challenges.
                                 </p>
                             </div>
+
+                            <div className="text-block">
+                                <h3 className="section-heading">Cyber Security</h3>
+                                <p className="section-paragraph">
+                                    We help businesses secure systems, protect data and strengthen resilience using modern cyber defense techniques.
+                                </p>
+                            </div>
+
                         </div>
 
                     </div>
                 </section>
-                
-                {/* INSERTED: Core Values Section with Video Background */}
+
+                {/* ===================== MISSION & VISION ===================== */}
+                <section className="mission-vision-section">
+                    <div className="mv-container">
+
+                        <div className="mv-card">
+                            <h3 className="mv-title">Our Mission</h3>
+                            <p className="mv-text">
+                                To deliver smart, reliable and impactful technology solutions that empower 
+                                businesses to operate efficiently and compete globally.
+                            </p>
+                        </div>
+
+                        <div className="mv-card">
+                            <h3 className="mv-title">Our Vision</h3>
+                            <p className="mv-text">
+                                To become one of Africa’s most trusted technology partners recognized for innovation 
+                                and long-term value creation.
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                {/* ===================== WHY CHOOSE US ===================== */}
+                <section className="why-us-section">
+                    <h2 className="why-title">Why Choose Bey Technology?</h2>
+                    <hr className="why-underline" />
+
+                    <div className="why-container">
+                        <div className="why-card">Experienced & certified team</div>
+                        <div className="why-card">Tailor-made solutions for each client</div>
+                        <div className="why-card">Reliable customer support</div>
+                        <div className="why-card">Modern & scalable technologies</div>
+                        <div className="why-card">Affordable, high-value services</div>
+                        <div className="why-card">Proven results & trusted partnerships</div>
+                    </div>
+                </section>
+
                 <CoreValuesSection />
-                
             </main>
         </div>
     );
